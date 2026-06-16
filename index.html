@@ -1812,6 +1812,7 @@
                   <span class="cz-cardcat">${icon(t.category)} ${esc(t.category)}</span>
                   <span class="cz-cardtitle">${esc(t.name)}</span>
                   <span class="cz-cardcase">${esc(desc)}…</span>
+                  ${t.demo? `<span style="display:inline-block;margin-top:5px;color:#0D9488;font-weight:800;font-size:.78rem">🔗 附 Manus 做好的範例</span>`:''}
                 </div></button>`;
             }).join('');
             $$('.cz-card', $('#txtGrid')).forEach(el=> el.addEventListener('click', ()=> openModal(el.dataset.id)));
@@ -1842,6 +1843,7 @@
                 ta.addEventListener('input', ()=>{ autoGrow(ta); build(); });
               });
             }
+            if(t.demo){ fw.insertAdjacentHTML('afterbegin', `<a href="${esc(t.demo)}" target="_blank" rel="noopener" style="display:block;margin:0 0 14px;padding:11px 14px;background:#0D9488;color:#fff;border-radius:10px;font-weight:800;text-decoration:none;text-align:center">🔗 看 Manus 做好的實際範例（可直接操作）→</a>`); }
             build();
             overlay.classList.add('open'); document.body.style.overflow='hidden';
             setTimeout(()=>$('#txtClose').focus(),50);
