@@ -1103,10 +1103,12 @@
                         <button class="cz-mode" type="button" data-mode="image" aria-pressed="false">🎨 長照出圖<span class="cz-mode-sub">28 張 · 貼 NotebookLM/Gemini 出衛教/活動圖</span></button>
                         <button class="cz-mode" type="button" data-mode="research" aria-pressed="false">🔍 長照研究<span class="cz-mode-sub">法規/評鑑/給付/實證 · Perplexity/Gemini DR</span></button>
                         <button class="cz-mode" type="button" data-mode="microsystem" aria-pressed="false">🔧 長照微系統<span class="cz-mode-sub">14 個小工具 · 貼 Manus 一鍵生成</span></button>
+                        <button class="cz-mode" type="button" data-mode="workflow" aria-pressed="false">🧩 跟著做完成一件大事<span class="cz-mode-sub">評鑑/核銷/家屬/結案 · 多步驟串起來</span></button>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="cz-redline">🔒 長照 AI 三紅線：① 去識別化（姓名→代號） ② 個資/病歷不上雲 ③ 人核章（最後簽名是你）　<a href="ai-safety-checklist.html" target="_blank" rel="noopener">下載：機構 AI 安全使用檢查表 ↗</a></div>
         <section id="tool" class="band tool-band" style="display:none">
             <div class="section-inner">
                 <div class="tool-shell">
@@ -1250,6 +1252,32 @@
 .cz-toast{background:var(--ink);color:#fff;padding:11px 18px;border-radius:999px;font-weight:800;font-size:.88rem;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(10px);transition:.3s;box-shadow:0 10px 30px rgba(16,24,40,.3)}
 .cz-toast.show{opacity:1;transform:none}
 .cz-toast.cyan{background:var(--primary-blue)}
+/* --- 優化新增：下拉/資安守門/去向/機構版/微系統追加/紅線 --- */
+.cz-field select.cz-fsel{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 11px;font:inherit;font-size:.9rem;background:#fff;cursor:pointer}
+.cz-field select.cz-fsel:focus{outline:none;border-color:var(--primary-blue);box-shadow:0 0 0 3px var(--soft-blue)}
+.cz-deid{display:flex;align-items:flex-start;gap:8px;background:#FFF6E9;border:1px solid #F2C879;border-radius:10px;padding:10px 12px;font-size:.82rem;font-weight:700;color:#92560C;margin:0 0 14px;cursor:pointer;line-height:1.5}
+.cz-deid input{margin-top:3px;flex:0 0 auto;width:16px;height:16px;cursor:pointer}
+.cz-go{margin:0 12px 12px;padding:11px 13px;background:#F0F7FA;border:1px solid #BFE3EE;border-radius:10px}
+.cz-go .cz-gobtn{display:inline-flex;align-items:center;gap:6px;background:var(--primary-blue);color:#fff;text-decoration:none;font-weight:900;font-size:.86rem;border-radius:8px;padding:8px 14px;margin-bottom:8px}
+.cz-go .cz-gobtn.manus{background:#5B43F2}
+.cz-go .cz-steps{display:flex;flex-wrap:wrap;gap:6px;font-size:.76rem;color:#3a536a;font-weight:700}
+.cz-go .cz-steps span{background:#fff;border:1px solid #cfe6ef;border-radius:999px;padding:3px 9px}
+.cz-org{border:none;border-radius:8px;padding:9px 14px;font-weight:900;cursor:pointer;font-size:.84rem;margin:0 12px 12px;background:#0D9488;color:#fff;width:calc(100% - 24px)}
+.cz-followup{margin:0 12px 14px;padding:11px 13px;background:#F6F4FF;border:1px solid #D9D2F7;border-radius:10px;font-size:.82rem;color:#3F2E8C;line-height:1.6}
+.cz-followup b{color:#2A1C6B}
+.cz-followup ul{margin:6px 0 4px;padding-left:18px}
+.cz-redline{background:#FFF1EC;border-top:1px solid #FAD4C6;border-bottom:1px solid #FAD4C6;padding:9px 16px;text-align:center;font-size:.83rem;font-weight:800;color:#A5391A;line-height:1.6}
+.cz-redline a{color:#0D9488;text-decoration:underline;font-weight:900;white-space:nowrap}
+/* 第5模式：工作流串接 */
+.wf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:6px}
+.wf-card{border:1px solid var(--line);border-radius:14px;background:#fff;padding:18px 18px 14px;box-shadow:var(--shadow)}
+.wf-card h3{margin:0 0 4px;font-size:1.05rem;font-weight:900;color:var(--ink)}
+.wf-card .wf-goal{font-size:.82rem;color:var(--muted);margin-bottom:12px;line-height:1.5}
+.wf-step{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:9px 0;border-top:1px dashed var(--line)}
+.wf-step .wf-n{width:24px;height:24px;border-radius:50%;background:var(--primary-blue);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.wf-step .wf-act{font-size:.86rem;color:var(--ink);font-weight:700;line-height:1.45}
+.wf-step .wf-tool{display:inline-block;margin-top:3px;font-size:.72rem;font-weight:900;color:#0D9488;background:#E6F5F2;border-radius:999px;padding:2px 9px}
+.wf-step .wf-hint{font-size:.74rem;color:var(--muted);margin-top:3px}
 </style>
 
         <section id="chutu" class="band tool-band" style="display:none">
@@ -1261,8 +1289,7 @@
                             <p>選一張長照圖格式 → 看範例 → 複製提示詞 → 貼進 NotebookLM／Gemini,把你的(去識別)資料畫成衛教圖、活動海報、評鑑成果圖。<strong>數字你核,圖讓它畫。</strong></p>
                         </div>
                         <div class="cz-setswitch" role="tablist" aria-label="卡片組切換" style="display:none">
-                            <button class="cz-set active" type="button" data-set="generic">🧰 通用出圖 · 10</button>
-                            <button class="cz-set" type="button" data-set="insurance">🛡 保險出圖 · 60</button>
+                            <button class="cz-set active" type="button" data-set="generic">🧰 長照出圖 · 28</button>
                         </div>
                     </div>
                     <div id="czTabs" class="cz-tabs"></div>
@@ -1327,9 +1354,11 @@
             { const el=$('#txt'); if(el) el.style.display=showTxt?'':'none'; }
             { const el=$('#chutu'); if(el) el.style.display=(m==='image')?'':'none'; }
             { const el=$('#research'); if(el) el.style.display=(m==='research')?'':'none'; }
+            { const el=$('#workflow'); if(el) el.style.display=(m==='workflow')?'':'none'; }
             if(showTxt && window.__txtSetMode) window.__txtSetMode(m==='microsystem'?'micro':'text');
             if(m==='image' && !inited){ inited=true; renderTabs(); renderGrid(); }
             if(m==='research' && window.__rsInit){ window.__rsInit(); }
+            if(m==='workflow' && window.__wfInit){ window.__wfInit(); }
             window.scrollTo({top:(($('.cz-mode-band')||{}).offsetTop||0)-8, behavior:'smooth'});
           }));
 
@@ -1721,6 +1750,52 @@
             </div>
         </section>
 
+        <section id="workflow" class="band tool-band" style="display:none">
+            <div class="section-inner">
+                <div class="tool-shell">
+                    <div class="tool-header">
+                        <div>
+                            <h2>🧩 跟著做，完成一件大事</h2>
+                            <p>長照真實任務常常不是一個提示詞就完事——這裡把 📝文案／🎨出圖／🔍研究／🔧微系統 串成 2-3 步的流程。照順序做,評鑑、核銷、家屬溝通、結案報告一次到位。點每一步的「→」會直接幫你切到該模式。</p>
+                        </div>
+                    </div>
+                    <div class="wf-grid" id="wfGrid"></div>
+                    <div class="tool-cta"><p>想把整套流程變成機構專屬 SOP?</p><a href="#contact" class="btn-quiet"><i class="bi bi-arrow-right-short"></i>討論企業導入</a></div>
+                </div>
+            </div>
+        </section>
+        <script type="application/json" id="wf-data">[{"id":"accreditation-sprint-pack","icon":"🏆","title":"評鑑快到了，三步把該交的資料補齊","goal":"從查最新評鑑基準、產出自評說明，到做成一張給委員看的佐證牆，一條龍把評鑑要交的東西生出來，不靠印象硬湊。","steps":[{"n":1,"mode":"research","tool":"Perplexity","action":"先查清楚你這次受評的評鑑基準最新版怎麼規定、委員常追問哪些、佐證要備哪些文件，把規則摸清楚再動手，不要憑印象做白工。","templateHint":"去研究模式找「法規／評鑑／給付查詢」這一類模板（例如評鑑基準查詢、衛福部規定彙整）。"},{"n":2,"mode":"text","tool":"Gemini / ChatGPT / Claude","action":"把第一步查到的基準，搭配你機構的實際做法，逐項生出能對應基準、委員看得懂的自評報告說明文字，誠實標出佐證已備齊與待補。","templateHint":"去文案模式找「評鑑與佐證」分類的模板（例如機構評鑑自評報告撰寫）。"},{"n":3,"mode":"image","tool":"NotebookLM / Gemini","action":"把自評重點和佐證清單做成一張一目了然的資訊圖（佐證牆／自評總表），貼在會議室或交給委員，現場一看就懂。","templateHint":"去出圖模式找「評鑑成果／佐證總表」這一類資訊圖模板。"}]},{"id":"subsidy-monthly-closing-pack","icon":"💰","title":"月底核銷別再加班，兩步把月結搞定","goal":"先查清楚這筆補助的核銷規定和該附的單據，再生出整份核銷說明與檢核清單，月底結帳一次到位不漏件。","steps":[{"n":1,"mode":"research","tool":"Perplexity / Gemini Deep Research","action":"查清楚這次要核銷的補助（長照給付、各項補助）最新核銷規定、應備單據、申報期限和常見退件原因，先把規則確認好再開始整理。","templateHint":"去研究模式找「給付／補助／核銷規定查詢」這一類模板。"},{"n":2,"mode":"text","tool":"Gemini / ChatGPT / Claude","action":"依查到的規定，把這個月的服務項目與金額整理成核銷說明文字，再生一份逐項打勾的單據檢核清單，送件前自己先對一遍。","templateHint":"去文案模式找「核銷／補助月結」分類的模板（例如補助核銷說明、單據檢核清單）。"}]},{"id":"family-communication-pack","icon":"💬","title":"要跟家屬講重要的事，兩步講清楚不踩雷","goal":"先把要跟家屬溝通的狀況寫成一封有溫度又交代清楚的訊息，再做成一張家屬一看就懂的圖卡，少誤會、少來回。","steps":[{"n":1,"mode":"text","tool":"Gemini / ChatGPT / Claude","action":"把住民近況、要請家屬配合或知道的事，寫成一封語氣溫和、重點清楚、家屬讀得懂的溝通訊息（LINE 或書面通知都行）。","templateHint":"去文案模式找「家屬溝通」分類的模板（例如家屬近況通知、家屬配合事項說明）。"},{"n":2,"mode":"image","tool":"NotebookLM / Gemini","action":"把溝通重點（例如用藥提醒、探視須知、衛教步驟）做成一張簡單明瞭的家屬圖卡，文字少、圖好懂，長輩家屬也看得進去。","templateHint":"去出圖模式找「衛教／家屬圖卡」這一類圖卡模板。"}]},{"id":"annual-quarterly-report-pack","icon":"📊","title":"季結年報要交了，三步把報告生出來","goal":"先查清楚這份結案報告主管機關要哪些格式與指標，再生出報告正文，最後做成一份能上台報的成果頁，從查規則到能報告一次完成。","steps":[{"n":1,"mode":"research","tool":"Perplexity / Gemini Deep Research","action":"查清楚這次季結／年度結案報告主管機關要求的格式、必填指標和繳交期限，先把框架確認好再寫，免得寫完不符規格整份重來。","templateHint":"去研究模式找「結案報告規定／指標查詢」這一類模板。"},{"n":2,"mode":"text","tool":"Gemini / ChatGPT / Claude","action":"把這一季／這一年的服務量、成效、亮點與待改善，依第一步的框架寫成結構完整、數字清楚的結案報告正文。","templateHint":"去文案模式找「年度／季結案報告」分類的模板（例如季結成效報告、年度結案報告撰寫）。"},{"n":3,"mode":"microsystem","tool":"Manus","action":"把報告重點做成一頁可上台報告的成果網頁／儀表板小工具，主管或評委會議直接打開展示，不用再另外排版做投影片。","templateHint":"去微系統模式找「成果報告頁／儀表板」這一類網頁小工具模板。"}]}]</script>
+        <script>
+        (function(){
+          "use strict";
+          const $=(s,r)=>(r||document).querySelector(s);
+          const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+          let PK=[], done=false;
+          const MODEMAP={text:"📝 文案",image:"🎨 出圖",research:"🔍 研究",microsystem:"🔧 微系統"};
+          window.__wfInit=function(){ if(done) return; done=true; try{ PK=JSON.parse($("#wf-data").textContent); }catch(e){ PK=[]; } render(); };
+          function render(){
+            const g=$('#wfGrid'); if(!g) return;
+            g.innerHTML=PK.map(function(p){
+              return '<div class="wf-card"><h3>'+esc(p.icon||'🧩')+' '+esc(p.title)+'</h3>'
+                + '<div class="wf-goal">'+esc(p.goal)+'</div>'
+                + (p.steps||[]).map(function(s){
+                    return '<div class="wf-step"><div class="wf-n">'+esc(s.n)+'</div><div>'
+                      + '<div class="wf-act">'+esc(s.action)+'</div>'
+                      + '<span class="wf-tool" data-gomode="'+esc(s.mode)+'" role="button" tabindex="0">→ '+esc(MODEMAP[s.mode]||s.mode)+'：貼 '+esc(s.tool)+'</span>'
+                      + (s.templateHint ? ('<div class="wf-hint">'+esc(s.templateHint)+'</div>') : '')
+                      + '</div></div>';
+                  }).join('')
+                + '</div>';
+            }).join('');
+            [].slice.call(g.querySelectorAll('.wf-tool[data-gomode]')).forEach(function(el){
+              var go=function(){ var mb=document.querySelector('.cz-mode[data-mode="'+el.dataset.gomode+'"]'); if(mb) mb.click(); };
+              el.addEventListener('click',go);
+              el.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); } });
+            });
+          }
+        })();
+        </script>
+
         <div class="cz-overlay" id="txtOverlay">
           <div class="cz-modal" id="txtModal" role="dialog" aria-modal="true" aria-labelledby="txtTitle">
             <div class="cz-mhead">
@@ -1738,6 +1813,10 @@
                   <div class="cz-pre" id="txtOut"></div>
                 </div>
                 <button class="cz-copy primary" id="txtCopy" style="width:calc(100% - 24px)">📋 複製提示詞</button>
+                <div class="cz-go" id="txtGo"></div>
+                <div class="cz-followup" id="txtFollow" style="display:none"></div>
+                <button class="cz-org" id="txtOrg" type="button">🏢 存成機構版</button>
+                <button class="cz-actbtn" id="txtMemClear" type="button" style="margin:0 12px 14px;font-size:.76rem;width:calc(100% - 24px)">🧹 清除本機記錄（公用電腦用完點一下）</button>
               </div>
             </div>
           </div>
@@ -1755,7 +1834,14 @@
           let TXT=[], activeCat='全部', kw='', cur=null, lastFocus=null, inited=false, activePersona='';
           let viewMode='text'; const MICRO_CAT='Manus 微系統';
           const modeBase = ()=> viewMode==='micro' ? TXT.filter(t=>t.category===MICRO_CAT) : TXT.filter(t=>t.category!==MICRO_CAT);
-          const PICON={'行政':'🗂️','護理':'🩺'};
+          const PICON={'行政':'🗂️','護理':'🩺','照服員':'👐','社工':'🤝','居服員':'🚪','主管':'🧭'};
+          /* 優化新增：本機記憶(只記固定選項/persona,純前端;公用電腦可清) + 個資掃描 */
+          const MEMK='ltc_mem_v1';
+          function memAll(){ try{ return JSON.parse(localStorage.getItem(MEMK)||'{}'); }catch(e){ return {}; } }
+          function memGet(k){ return memAll()[k]; }
+          function memSet(k,v){ try{ const m=memAll(); if(v) m[k]=v; else delete m[k]; localStorage.setItem(MEMK, JSON.stringify(m)); }catch(e){} }
+          function memClear(){ try{ localStorage.removeItem(MEMK); }catch(e){} }
+          function scanPII(s){ s=String(s||''); if(/[A-Za-z][12]\d{8}/.test(s)) return '身分證字號'; if(/09\d{2}[-\s]?\d{3}[-\s]?\d{3}/.test(s)) return '手機號碼'; if(/(?:^|[^0-9])[0-9]{9,}(?:[^0-9]|$)/.test(s)) return '疑似病歷號或長串數字'; return ''; }
 
           window.__txtInit = function(){ if(inited) return; inited=true; load(); };
           window.__txtSetMode = function(mode){
@@ -1776,16 +1862,18 @@
               const r = await fetch('prompt-templates.json', {cache:'no-store'});
               TXT = await r.json();
               TXT.forEach((t,i)=>{ if(!t.id) t.id='tpl-'+i; });
-              setupPersona(); renderTabs(); renderGrid();
+              setupPersona(); renderTabs(); renderGrid(); tryOrg();
             }catch(e){ $('#txtGrid').innerHTML='<div class="cz-empty">模板載入失敗,請重新整理。</div>'; }
           }
           function setupPersona(){
             const ps=[...new Set(modeBase().map(t=>t.persona).filter(Boolean))];
             const box=$('#txtPersona'); if(!box) return;
             if(ps.length<2){ box.style.display='none'; return; }
-            activePersona=ps[0]; box.style.display='';
-            box.innerHTML=ps.map((p,i)=>`<button class="cz-set${i===0?' active':''}" data-persona="${esc(p)}">${PICON[p]||''} ${esc(p)}</button>`).join('');
-            $$('.cz-set',box).forEach(b=> b.addEventListener('click', ()=>{ activePersona=b.dataset.persona; activeCat='全部'; $$('.cz-set',box).forEach(x=>x.classList.toggle('active',x===b)); renderTabs(); renderGrid(); }));
+            const remembered=memGet('__persona');
+            activePersona = (remembered && ps.includes(remembered)) ? remembered : ps[0];
+            box.style.display='';
+            box.innerHTML=ps.map((p)=>`<button class="cz-set${p===activePersona?' active':''}" data-persona="${esc(p)}">${PICON[p]||''} ${esc(p)}</button>`).join('');
+            $$('.cz-set',box).forEach(b=> b.addEventListener('click', ()=>{ activePersona=b.dataset.persona; memSet('__persona',activePersona); activeCat='全部'; $$('.cz-set',box).forEach(x=>x.classList.toggle('active',x===b)); renderTabs(); renderGrid(); }));
           }
           const personaBase = ()=> activePersona? modeBase().filter(t=>t.persona===activePersona) : modeBase();
           const visible = ()=>{
@@ -1820,7 +1908,7 @@
 
           const overlay = $('#txtOverlay');
           function autoGrow(ta){ ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,180)+'px'; }
-          function openModal(id){
+          function openModal(id, prefill){
             const t = TXT.find(x=>x.id===id); if(!t) return;
             cur=t; lastFocus=document.activeElement;
             $('#txtCat').textContent = icon(t.category)+' '+t.category;
@@ -1833,17 +1921,34 @@
               fw.innerHTML = fields.map(f=>
                 `<div class="cz-field">
                   <div class="cz-flabel"><span>${esc(f.label||f.id)}</span></div>
-                  ${ f.type==='textarea'
+                  ${ f.type==='select'
+                     ? `<select id="txf_${esc(f.id)}" class="cz-fsel"><option value="">— 請選擇（也可複製後自行修改）—</option>`+(Array.isArray(f.options)?f.options:[]).map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')+`</select>`
+                     : f.type==='textarea'
                      ? `<textarea id="txf_${esc(f.id)}" placeholder="${esc(f.placeholder||'')}"></textarea>`
                      : `<textarea id="txf_${esc(f.id)}" rows="1" placeholder="${esc(f.placeholder||'')}"></textarea>` }
                 </div>`).join('');
               fields.forEach(f=>{
-                const ta=$('#txf_'+CSS.escape(f.id), fw);
-                autoGrow(ta);
-                ta.addEventListener('input', ()=>{ autoGrow(ta); build(); });
+                const el=$('#txf_'+CSS.escape(f.id), fw); if(!el) return;
+                const pre = prefill && prefill[f.id];
+                if(f.type==='select'){
+                  const mv = pre || memGet(f.id);
+                  if(mv && [...el.options].some(o=>o.value===mv)) el.value=mv;
+                  el.addEventListener('change', ()=>{ memSet(f.id, el.value); build(); });
+                }else{
+                  if(pre) el.value=pre;
+                  autoGrow(el);
+                  el.addEventListener('input', ()=>{ autoGrow(el); build(); });
+                }
               });
             }
+            fw.insertAdjacentHTML('afterbegin', `<label class="cz-deid"><input type="checkbox" id="txtDeid"> 我已把姓名／身分證／病歷號／電話改成代號（例：住民Ａ、80-84 歲）—— 雲端 AI 不放真實個資</label>`);
             if(t.demo){ fw.insertAdjacentHTML('afterbegin', `<a href="${esc(t.demo)}" target="_blank" rel="noopener" style="display:block;margin:0 0 14px;padding:11px 14px;background:#0D9488;color:#fff;border-radius:10px;font-weight:800;text-decoration:none;text-align:center">🔗 看 Manus 做好的實際範例（可直接操作）→</a>`); }
+            const isMicro = (t.category===MICRO_CAT);
+            { const tag=$('#txtTag'); if(tag) tag.textContent = isMicro ? '貼進 Manus 生成小工具' : '貼進 ChatGPT／Claude／Gemini'; }
+            { const go=$('#txtGo'); if(go) go.innerHTML = isMicro
+                ? `<a class="cz-gobtn manus" href="https://manus.im/app" target="_blank" rel="noopener">↗ 開啟 Manus</a><div class="cz-steps"><span>① 複製</span><span>② 開 Manus</span><span>③ 貼上送出</span><span>④ 等 3-4 分拿連結</span></div>`
+                : `<a class="cz-gobtn" href="https://gemini.google.com/app" target="_blank" rel="noopener">↗ 開啟 Gemini</a><div class="cz-steps"><span>① 複製</span><span>② 開 Gemini</span><span>③ 貼上送出</span><span>④ 看結果</span></div>`; }
+            { const fol=$('#txtFollow'); if(fol){ if(isMicro){ fol.style.display=''; fol.innerHTML = `<b>🛠️ 生成後不滿意？三句萬用追加指令（直接再貼給 Manus）：</b><ul><li>「把欄位改成 ＿＿、拿掉 ＿＿」</li><li>「加一個自動加總／自動標紅／統計圖」</li><li>「介面字放大，給長輩同事看得清楚」</li></ul>💡 省點數：同一個工具用<b>追加修改</b>，不要整個打掉重跑。`; } else { fol.style.display='none'; } } }
             build();
             overlay.classList.add('open'); document.body.style.overflow='hidden';
             setTimeout(()=>$('#txtClose').focus(),50);
@@ -1872,7 +1977,38 @@
             w.appendChild(el); requestAnimationFrame(()=>el.classList.add('show'));
             setTimeout(()=>{ el.classList.remove('show'); setTimeout(()=>el.remove(),300); },3000);
           }
-          $('#txtCopy').addEventListener('click', ()=> cur && doCopy($('#txtOut').textContent));
+          function guardedCopy(text){
+            const hit=scanPII(text);
+            if(hit){ if(!window.confirm('⚠️ 偵測到可能的個資（'+hit+'）。\n雲端 AI 不可輸入真實姓名／身分證／病歷號／電話，請改成代號。\n\n仍要複製嗎？')) return; }
+            doCopy(text);
+          }
+          $('#txtCopy').addEventListener('click', ()=> cur && guardedCopy($('#txtOut').textContent));
+          // 機構版：把填好的內容編進網址,複製給同事打開即預填
+          $('#txtOrg').addEventListener('click', ()=>{
+            if(!cur) return;
+            const vals={}; (Array.isArray(cur.structure)?cur.structure:[]).forEach(f=>{ const v=($('#txf_'+CSS.escape(f.id))?.value||'').trim(); if(v) vals[f.id]=v; });
+            const pii=scanPII(JSON.stringify(vals));
+            if(pii){ if(!window.confirm('⚠️ 機構版連結會帶上你填的內容,偵測到可能的個資（'+pii+'）。\n建議改成代號再存。仍要產生連結嗎？')) return; }
+            try{
+              const payload=btoa(unescape(encodeURIComponent(JSON.stringify({i:cur.id,v:vals}))));
+              const url=location.origin+location.pathname+'#org='+payload;
+              guardedCopy(url);
+              toast('機構版連結已複製,傳給同事打開就會自動帶入');
+            }catch(e){ toast('產生連結失敗,請改用複製提示詞'); }
+          });
+          $('#txtMemClear').addEventListener('click', ()=>{ memClear(); toast('已清除本機記錄'); });
+          // 開啟頁面時若帶機構版連結 → 自動切模式並預填打開
+          function tryOrg(){
+            const m=(location.hash||'').match(/org=([^&]+)/); if(!m) return;
+            try{
+              const obj=JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+              const t=TXT.find(x=>x.id===obj.i); if(!t) return;
+              const wantMicro = (t.category===MICRO_CAT);
+              const mb=document.querySelector('.cz-mode[data-mode="'+(wantMicro?'microsystem':'text')+'"]');
+              if(mb && !mb.classList.contains('active')) mb.click();
+              setTimeout(()=>openModal(obj.i, obj.v||{}), 60);
+            }catch(e){}
+          }
           $('#txtClose').addEventListener('click', closeModal);
           overlay.addEventListener('click', e=>{ if(e.target===overlay) closeModal(); });
           document.addEventListener('keydown', e=>{ if(e.key==='Escape' && overlay.classList.contains('open')) closeModal(); });

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長照機構 AI 安全使用檢查表（雲端 AI 每次使用前後自我把關）</title>
+<style>
+  :root{--primary:#0099BB;--ink:#1C1C1E;--grey:#5A5A5E;--line:#E5E7EB;--red:#C2410C;--bg:#F7F9FA}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans CJK TC","Noto Sans TC","PingFang TC",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;padding:28px 16px 60px}
+  .sheet{max-width:880px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:34px 38px}
+  .head{border-bottom:3px solid var(--primary);padding-bottom:16px;margin-bottom:8px}
+  h1{font-size:22px;font-weight:800;color:var(--ink);line-height:1.35}
+  .intro{font-size:13.5px;color:var(--grey);margin:14px 0 6px;background:#F0F7FA;border-radius:10px;padding:14px 16px;border-left:4px solid var(--primary)}
+  .phase{margin-top:22px;break-inside:avoid}
+  .phase h2{font-size:16px;font-weight:800;color:var(--primary);margin-bottom:8px}
+  .phase ul{list-style:none}
+  .phase li{display:flex;gap:11px;align-items:flex-start;padding:7px 0;font-size:14px;border-bottom:1px dashed var(--line)}
+  .box{flex:0 0 auto;width:18px;height:18px;border:2px solid var(--primary);border-radius:4px;margin-top:2px}
+  .red{margin-top:26px;background:#FFF1EC;border:1.5px solid #FAD4C6;border-radius:12px;padding:18px 20px;break-inside:avoid}
+  .red h2{color:var(--red);font-size:16px;font-weight:800;margin-bottom:10px}
+  .red ul{padding-left:20px}
+  .red li{font-size:13.5px;color:#7C2D12;margin:6px 0;font-weight:600}
+  .sign{margin-top:24px;display:flex;gap:30px;flex-wrap:wrap;font-size:13px;color:var(--grey)}
+  .sign div{border-top:1px solid var(--ink);padding-top:6px;min-width:180px}
+  footer{text-align:center;color:#9CA3AF;font-size:12px;margin-top:28px}
+  .print-btn{display:inline-block;margin:0 auto 18px;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer}
+  .toolbar{text-align:center}
+  @media print{body{background:#fff;padding:0}.sheet{border:none;border-radius:0;max-width:100%;padding:10px 6px}.toolbar{display:none}}
+</style>
+</head>
+<body>
+  <div class="toolbar"><button class="print-btn" onclick="window.print()">🖨️ 列印 / 存成 PDF</button></div>
+  <div class="sheet">
+    <div class="head"><h1>🔒 長照機構 AI 安全使用檢查表（雲端 AI 每次使用前後自我把關）</h1></div>
+    <p class="intro">用雲端 AI（Manus／Gemini／ChatGPT）幫忙寫文件、整理交辦很方便，但長照同仁最怕的就是「順手貼上去」結果把住民隱私、家屬電話傳出去，事後要扛責任。這張表把最容易出包的三件事——失敗了能不能救回來、拍照交辦會不會洩漏、去識別化有沒有做到——拆成每次用前用後自己勾的動作。貼在電腦旁，動手前花十秒勾一遍，比事後寫報告道歉省事一百倍。</p>
+    
+    <section class="phase">
+      <h2>① 用 AI 前（先想好退路）</h2>
+      <ul><li><span class="box"></span><span>我清楚這次只是要 AI 幫忙寫初稿／整理，最後判斷跟簽名還是我自己來</span></li><li><span class="box"></span><span>原始資料（住民紀錄、會議錄音、Excel）我手邊有留一份，AI 弄壞、跑掉、登出我也救得回來</span></li><li><span class="box"></span><span>這台是機構的電腦、登入的是機構或我自己的帳號，不是隨便借別人的帳號</span></li><li><span class="box"></span><span>我知道萬一傳錯、貼錯，第一步是先截圖存證再回報主管，不是自己默默刪掉裝沒事</span></li></ul>
+    </section>
+    <section class="phase">
+      <h2>② 貼資料前（守門最關鍵）</h2>
+      <ul><li><span class="box"></span><span>住民／家屬的真實姓名、身分證字號、病歷號、電話、地址，我已經換成代號或刪掉（例：住民A、80-84歲、家屬B）</span></li><li><span class="box"></span><span>要 AI 看的照片，我已經確認畫面裡沒有露出名牌、床頭卡、健保卡、藥袋上的個資</span></li><li><span class="box"></span><span>拍照交辦給同事或群組前，我先看過這張照片有沒有照到別的住民、別人的臉或文件</span></li><li><span class="box"></span><span>這份資料如果外流會不會害到住民或機構？會的話我就不貼上雲，改用本機文書處理</span></li></ul>
+    </section>
+    <section class="phase">
+      <h2>③ 拿到結果後（不要照單全收）</h2>
+      <ul><li><span class="box"></span><span>AI 寫的內容我從頭讀一遍，數字、日期、法規、藥名我都對過真實資料，沒有就是沒有</span></li><li><span class="box"></span><span>凡是牽涉到身體狀況、用藥、跌倒風險的臨床判斷，我交給護理師／醫師確認，不讓 AI 當決定</span></li><li><span class="box"></span><span>AI 講得很肯定的法規或補助規定，我回官方來源（衛福部／長照專線）再查一次，不直接相信</span></li><li><span class="box"></span><span>內容裡如果還有不小心留下的真實姓名或個資，我在這一步全部清乾淨</span></li></ul>
+    </section>
+    <section class="phase">
+      <h2>④ 送出前（最後一道人關）</h2>
+      <ul><li><span class="box"></span><span>這份文件要交出去前，是「我」核對過、不是 AI 說 OK 就 OK</span></li><li><span class="box"></span><span>正式文件的簽名、核章一定是人來簽，AI 不代簽、不蓋章</span></li><li><span class="box"></span><span>我已經確認收件對象正確（沒貼錯群組、沒寄錯人），敏感內容只給該看的人</span></li><li><span class="box"></span><span>結尾有標註這是 AI 協助的初稿、已由本人核對定稿，責任歸屬清楚</span></li></ul>
+    </section>
+    <div class="red"><h2>🚫 五條絕對紅線（無論多趕都不能破）</h2><ul><li>真實姓名、身分證字號、病歷號、家屬電話地址——絕不上傳到任何雲端 AI，一律先換代號或刪除</li><li>臨床醫療判斷（用藥、病情、跌倒／吞嚥風險）絕不交給 AI 決定，一定由護理師／醫師把關</li><li>最後簽名、核章一定是人，AI 不代簽、不蓋章、不負責</li><li>住民／家屬照片含臉孔或個資（名牌、床頭卡、健保卡）絕不丟給雲端 AI 或轉傳群組</li><li>AI 寫的法規、補助、數字未經官方來源查證前，絕不直接對外使用</li></ul></div>
+    <div class="sign">
+      <div>使用人簽名：＿＿＿＿＿＿＿＿</div>
+      <div>日期：＿＿＿＿年＿＿月＿＿日</div>
+      <div>主管核章：＿＿＿＿＿＿＿＿</div>
+    </div>
+    <footer>大人提 AI Agent 工作坊　｜　講師：黃敬峰（AI峰哥）・Autolab　｜　貼在機構電腦旁,動手前花十秒勾一遍</footer>
+  </div>
+</body>
+</html>
