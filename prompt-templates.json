@@ -5444,7 +5444,7 @@
     "name": "訪客志工登記與健康聲明系統",
     "category": "Manus 微系統",
     "persona": "行政",
-    "icon": "📝",
+    "icon": "🪪",
     "structure": [
       {
         "type": "text",
@@ -5485,7 +5485,7 @@
     "name": "照服員排班衝突檢核工具",
     "category": "Manus 微系統",
     "persona": "護理",
-    "icon": "📅",
+    "icon": "👥",
     "structure": [
       {
         "type": "text",
@@ -5690,7 +5690,7 @@
     "name": "長輩日常作息與活動參與紀錄表",
     "category": "Manus 微系統",
     "persona": "護理",
-    "icon": "📝",
+    "icon": "📒",
     "structure": [
       {
         "type": "text",
