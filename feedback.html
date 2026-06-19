@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>長照 AI 工具箱・使用回饋</title>
+<style>
+  :root{--primary:#0099BB;--primary-d:#007A99;--accent:#FF6B35;--ink:#1C1C1E;--grey:#5A5A5E;--line:#E5E7EB;--bg:#F2F5F7;--ok:#0D9488}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans CJK TC","Noto Sans TC","PingFang TC",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;padding:22px 13px 70px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:600px;margin:0 auto}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(16,24,40,.07)}
+  .head{background:linear-gradient(135deg,#0A3340,#0099BB);color:#fff;padding:24px 24px 20px}
+  .head h1{font-size:20px;font-weight:800;margin-bottom:6px}
+  .head .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:12.5px}
+  .intro{padding:17px 24px;font-size:13.5px;color:var(--grey);border-bottom:1px solid var(--line);background:#F8FBFC}
+  .q{padding:19px 24px;border-bottom:1px solid var(--line)}
+  .qt{font-size:15px;font-weight:700;margin-bottom:11px}
+  .qt .num{color:var(--primary);font-weight:800;margin-right:5px}
+  .qt .opt{color:var(--grey);font-size:12px;font-weight:600}
+  .qt .star{color:var(--accent)}
+  .opts{display:flex;flex-direction:column;gap:8px}
+  label.o{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;cursor:pointer;transition:.12s}
+  label.o:active{transform:scale(.99)}
+  label.o input{flex:0 0 auto;width:18px;height:18px;accent-color:var(--primary);margin:0}
+  label.o.on{border-color:var(--primary);background:#F0F8FB}
+  .faces{display:flex;gap:9px}
+  label.face{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;font-size:12.5px;font-weight:700;cursor:pointer}
+  label.face input{display:none}
+  label.face .em{font-size:25px;display:block;margin-bottom:4px}
+  label.face.on{border-color:var(--primary);background:#F0F8FB}
+  textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:14px;resize:vertical;min-height:74px}
+  textarea:focus{outline:none;border-color:var(--primary)}
+  .submit{display:block;width:calc(100% - 48px);margin:18px 24px 22px;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:14px;font-weight:800;font-size:16px;cursor:pointer}
+  .submit:disabled{opacity:.6}
+  .err{color:var(--accent);font-size:13px;font-weight:700;margin:0 24px 8px;display:none}
+  .done{display:none;padding:50px 30px;text-align:center}
+  .done .big{font-size:52px;margin-bottom:14px}
+  .done h2{font-size:20px;font-weight:800;margin-bottom:10px}
+  .done p{font-size:14px;color:var(--grey)}
+  .foot{text-align:center;color:#9CA3AF;font-size:11.5px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="card">
+    <div class="head">
+      <h1>長照 AI 工具箱・使用回饋</h1>
+      <span class="pill">📱 手機 3 分鐘 · 幾乎都用點的</span>
+    </div>
+    <div class="intro">
+      嗨，我是阿峰 👋 上次工作坊跟大家分享的那個「長照 AI 工具箱」（免登入、打開就能用的網站），我想把它越改越好用、越貼近你每天的工作。<br><br>
+      這份不是考試、沒有對錯，幫我勾幾題就好，最後一題想寫再寫。<b>你勾的每一個，下一版我就照著改。</b>
+    </div>
+
+    <form id="f">
+      <div class="q">
+        <div class="qt"><span class="num">1</span>工作坊之後，你有再自己打開來用過嗎？<span class="star"> *</span></div>
+        <div class="opts" data-q="q1" data-type="single">
+          <label class="o"><input type="radio" name="q1" value="有，常常用">有，常常用</label>
+          <label class="o"><input type="radio" name="q1" value="有，用過幾次">有，用過幾次</label>
+          <label class="o"><input type="radio" name="q1" value="上課當下用過，後來沒再開">上課當下用過，後來沒再開</label>
+          <label class="o"><input type="radio" name="q1" value="還沒打開過">還沒打開過（沒關係，老實勾就好）</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">2</span>你的工作主要是？<span class="star"> *</span></div>
+        <div class="opts" data-q="q2" data-type="single">
+          <label class="o"><input type="radio" name="q2" value="行政／總務">🗂️ 行政／總務</label>
+          <label class="o"><input type="radio" name="q2" value="護理師">🩺 護理師</label>
+          <label class="o"><input type="radio" name="q2" value="照服員">💪 照服員</label>
+          <label class="o"><input type="radio" name="q2" value="居服員／日照">🏠 居服員／日照</label>
+          <label class="o"><input type="radio" name="q2" value="社工">🤝 社工</label>
+          <label class="o"><input type="radio" name="q2" value="主管／負責人">👔 主管／負責人</label>
+          <label class="o"><input type="radio" name="q2" value="其他">其他（營養、復健、廚房等）</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">3</span>這幾個功能，你「真的有打開用過」哪些？<span class="opt"> 可複選</span><span class="star"> *</span></div>
+        <div class="opts" data-q="q3" data-type="multi">
+          <label class="o"><input type="checkbox" value="文案">📝 文案（填一填，貼到 ChatGPT／Gemini 幫你寫東西）</label>
+          <label class="o"><input type="checkbox" value="出圖">🎨 出圖（做衛教單、活動海報、評鑑圖）</label>
+          <label class="o"><input type="checkbox" value="研究">🔍 研究（查法規、評鑑、給付規定）</label>
+          <label class="o"><input type="checkbox" value="小工具">🔧 小工具（會幫你生一個可分享的小網頁）</label>
+          <label class="o"><input type="checkbox" value="跟著做">🧩 跟著做（評鑑、核銷整套步驟串起來）</label>
+          <label class="o"><input type="checkbox" value="都沒用過">我還沒真的用過任何一個</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">4</span>切到「你自己的身分」那一頁，裡面的範例句貼不貼近你的工作？<span class="star"> *</span></div>
+        <div class="opts" data-q="q4" data-type="single">
+          <label class="o"><input type="radio" name="q4" value="很貼，幾乎都用得上">很貼，幾乎都用得上</label>
+          <label class="o"><input type="radio" name="q4" value="還可以，一半用得上">還可以，一半左右用得上</label>
+          <label class="o"><input type="radio" name="q4" value="有點空，少了我常做的事">有點空，少了我常做的事</label>
+          <label class="o"><input type="radio" name="q4" value="我沒找到自己的身分頁">我沒找到自己的身分頁</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">5</span>用的時候，最常卡在哪？<span class="opt"> 可複選・沒卡就跳過</span></div>
+        <div class="opts" data-q="q5" data-type="multi">
+          <label class="o"><input type="checkbox" value="不知道選哪個、會迷路">不知道要選哪個、有點迷路</label>
+          <label class="o"><input type="checkbox" value="格子不知道填什麼">格子不知道要填什麼</label>
+          <label class="o"><input type="checkbox" value="複製後不知道貼到哪">複製出來後，不知道貼到哪、怎麼貼到 ChatGPT</label>
+          <label class="o"><input type="checkbox" value="AI給的還要改很多">貼過去後，AI 給的還要改很多才能用</label>
+          <label class="o"><input type="checkbox" value="怕貼到個資">怕不小心把住民名字、資料貼進去</label>
+          <label class="o"><input type="checkbox" value="手機難按">手機上字太小、按鈕太難按</label>
+          <label class="o"><input type="checkbox" value="都很順">我用起來都很順，沒卡過</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">6</span>你最希望「多加」什麼？<span class="opt"> 最多選 2 個</span></div>
+        <div class="opts" data-q="q6" data-type="multi" data-max="2">
+          <label class="o"><input type="checkbox" value="多一點我這職類的範例句">多一點我這個工作會用到的範例句</label>
+          <label class="o"><input type="checkbox" value="多一點出圖">多一點出圖的圖（衛教單、海報、評鑑圖）</label>
+          <label class="o"><input type="checkbox" value="多一點查法規指令">多一點查法規／評鑑／給付的指令</label>
+          <label class="o"><input type="checkbox" value="多一點小工具">多一點小工具</label>
+          <label class="o"><input type="checkbox" value="用講的就能填">用「講的」就能填（不用打字）</label>
+          <label class="o"><input type="checkbox" value="看別人填好的成品">看別人填好的成品長怎樣（範例庫）</label>
+          <label class="o"><input type="checkbox" value="教學影片">手把手教學影片</label>
+          <label class="o"><input type="checkbox" value="夠用了">現在這樣就夠用了</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">7</span>整體用起來，會不會難？<span class="star"> *</span></div>
+        <div class="opts" data-q="q7" data-type="single">
+          <label class="o"><input type="radio" name="q7" value="很好用，自己就會">很好用，自己一個人就會</label>
+          <label class="o"><input type="radio" name="q7" value="還行，偶爾要想一下">還行，偶爾要想一下</label>
+          <label class="o"><input type="radio" name="q7" value="有點難，常卡住">有點難，常常卡住</label>
+          <label class="o"><input type="radio" name="q7" value="太難了，幾乎不會用">太難了，我幾乎不會用</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">8</span>你會想揪同事一起用嗎？<span class="star"> *</span></div>
+        <div class="faces" data-q="q8" data-type="single">
+          <label class="face"><input type="radio" name="q8" value="會，我會主動揪"><span class="em">😀</span>會，我會主動揪</label>
+          <label class="face"><input type="radio" name="q8" value="同事問我才會講"><span class="em">🙂</span>同事問我才會講</label>
+          <label class="face"><input type="radio" name="q8" value="目前不會"><span class="em">😐</span>目前不會</label>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt"><span class="num">9</span>最後，想跟阿峰說一句話嗎？<span class="opt"> 想寫再寫，不想寫跳過</span></div>
+        <textarea id="q9" placeholder="哪裡好用、哪裡想罵、想加什麼都可以…"></textarea>
+      </div>
+
+      <div class="err" id="err">還有必填（標 *）沒填到，往上看一下 🙏</div>
+      <button type="submit" class="submit" id="sb">送出回饋</button>
+    </form>
+
+    <div class="done" id="done">
+      <div class="big">🙌</div>
+      <h2>收到了，謝謝你！</h2>
+      <p>你願意花這 3 分鐘，比客套的稱讚有用一百倍。<br>每一個勾選阿峰都會看，下一版會照你說的調。<br><br>會用、懂用、好用、每天用 —— 我們一起把工具箱磨到你天天想打開。<br>— 阿峰</p>
+    </div>
+  </div>
+  <div class="foot">大人提 AI Agent 工作坊 · Autolab</div>
+</div>
+
+<script>
+(function(){
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzh4EGoEaNk45pIokCb34xhY2KSTL72PL-XVFcjThq1fRbYZQTANscBU-5_17WBU1o-xQ/exec';
+  var $ = function(s,r){ return (r||document).querySelector(s); };
+  var $$ = function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
+
+  $$('.opts, .faces').forEach(function(box){
+    var type = box.dataset.type, max = parseInt(box.dataset.max||'0',10);
+    $$('input', box).forEach(function(inp){
+      inp.addEventListener('change', function(){
+        if(type==='single'){ $$('label', box).forEach(function(l){ l.classList.remove('on'); }); inp.closest('label').classList.add('on'); }
+        else {
+          if(max){ var checked=$$('input:checked', box); if(checked.length>max){ inp.checked=false; return; } }
+          inp.closest('label').classList.toggle('on', inp.checked);
+        }
+      });
+    });
+  });
+
+  function val(name){ var el=$('input[name="'+name+'"]:checked'); return el?el.value:''; }
+  function vals(q){ return $$('.opts[data-q="'+q+'"] input:checked').map(function(i){return i.value;}); }
+
+  $('#f').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var data = { q1:val('q1'), q2:val('q2'), q3:vals('q3'), q4:val('q4'),
+      q5:vals('q5'), q6:vals('q6'), q7:val('q7'), q8:val('q8'), q9:($('#q9').value||'').trim() };
+    if(!data.q1||!data.q2||!data.q3.length||!data.q4||!data.q7||!data.q8){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+    $('#err').style.display='none';
+    var btn=$('#sb'); btn.disabled=true; btn.textContent='送出中…';
+    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) })
+      .then(finish).catch(finish);
+    function finish(){ $('#f').style.display='none'; $('#done').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
+  });
+})();
+</script>
+</body>
+</html>
