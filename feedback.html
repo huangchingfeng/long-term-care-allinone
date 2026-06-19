@@ -132,6 +132,13 @@
       <p>你寫的每一個情境，阿峰都會看，<br>有機會就把它做進工具箱、變成你能用的範本。<br><br>會用、懂用、好用、每天用 —— 我們一起把工具磨到貼著你的工作。<br>— 阿峰</p>
       <div class="donecontact">想請老師到機構上課、想要專屬範例，或有任何問題，歡迎直接聯絡：<br><b>阿峰老師（黃敬峰）</b>　企業 AI 實戰培訓<br>📱 LINE／電話：0976-715-102<br>✉️ Email：ai@autolab.cloud<br>🌐 網站：autolab.cloud</div>
     </div>
+
+    <div class="done" id="closed" style="display:none">
+      <div class="big">🙏</div>
+      <h2>這份「情境許願」已經截止囉</h2>
+      <p>謝謝大家的參與！收集到的願望阿峰會一個一個看、慢慢做進工具箱。<br><br>工具箱隨時都能用 👉 huangchingfeng.github.io/long-term-care-allinone<br>想許願、想要專屬範例、或機構想排課，還是可以直接找我：</p>
+      <div class="donecontact"><b>阿峰老師（黃敬峰）</b>　企業 AI 實戰培訓<br>📱 LINE／電話：0976-715-102<br>✉️ Email：ai@autolab.cloud<br>🌐 網站：autolab.cloud</div>
+    </div>
   </div>
   <div class="foot">大人提 AI Agent 工作坊 · Autolab</div>
 </div>
@@ -141,6 +148,11 @@
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrlfPI5XtPFl1ceFklRy6pZtSxNddwZcqJcVrRfCYEuB2_vAJBT2EAnAg9BMs5xBsRAQ/exec';
   var $ = function(s,r){ return (r||document).querySelector(s); };
   var $$ = function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
+
+  // 截止：6/24（含）晚上 23:59（台灣時間）自動關閉
+  var CLOSE_AT = new Date('2026-06-24T23:59:59+08:00').getTime();
+  function isClosed(){ return Date.now() > CLOSE_AT; }
+  if(isClosed()){ var f0=$('#f'); if(f0) f0.style.display='none'; var c0=$('#closed'); if(c0) c0.style.display='block'; }
 
   $$('.opts').forEach(function(box){
     var type = box.dataset.type;
@@ -157,6 +169,7 @@
 
   $('#f').addEventListener('submit', function(ev){
     ev.preventDefault();
+    if(isClosed()){ $('#f').style.display='none'; $('#closed').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
     var data = { q1:val('q1'), q2:vals('q2'), q3:($('#q3').value||'').trim(), q4:($('#q4').value||'').trim(),
       q5:val('q5'), q6:val('q6'), q7:($('#q7').value||'').trim() };
     if(!data.q1||!data.q2.length||!data.q3||!data.q5||!data.q6){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
