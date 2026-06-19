@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>長照 AI 工具箱・使用回饋</title>
+<title>長照 AI 工具箱・你還想要什麼？（情境許願）</title>
 <style>
   :root{--primary:#0099BB;--primary-d:#007A99;--accent:#FF6B35;--ink:#1C1C1E;--grey:#5A5A5E;--line:#E5E7EB;--bg:#F2F5F7;--ok:#0D9488}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -14,13 +14,10 @@
   .head h1{font-size:20px;font-weight:800;margin-bottom:6px}
   .head .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:12.5px}
   .intro{padding:17px 24px;font-size:13.5px;color:var(--grey);border-bottom:1px solid var(--line);background:#F8FBFC}
+  .intro b{color:var(--ink)}
   .q{padding:19px 24px;border-bottom:1px solid var(--line)}
   .q.invite{background:#FFF6E9}
   .q.invite .num{color:var(--accent)}
-  .mycontact{margin-top:11px;background:#fff;border:1px dashed #F2C879;border-radius:10px;padding:11px 13px;font-size:12.5px;color:#92560C;line-height:1.7}
-  .mycontact b{color:#7C2D12}
-  .donecontact{margin:18px auto 0;max-width:420px;background:#F0F7FA;border:1px solid #BFE3EE;border-radius:12px;padding:15px 18px;font-size:13.5px;color:var(--ink);line-height:1.85;text-align:left}
-  .donecontact b{color:var(--primary-d)}
   .qt{font-size:15px;font-weight:700;margin-bottom:11px}
   .qt .num{color:var(--primary);font-weight:800;margin-right:5px}
   .qt .opt{color:var(--grey);font-size:12px;font-weight:600}
@@ -30,20 +27,19 @@
   label.o:active{transform:scale(.99)}
   label.o input{flex:0 0 auto;width:18px;height:18px;accent-color:var(--primary);margin:0}
   label.o.on{border-color:var(--primary);background:#F0F8FB}
-  .faces{display:flex;gap:9px}
-  label.face{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:13px 6px;text-align:center;font-size:12.5px;font-weight:700;cursor:pointer}
-  label.face input{display:none}
-  label.face .em{font-size:25px;display:block;margin-bottom:4px}
-  label.face.on{border-color:var(--primary);background:#F0F8FB}
   textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:14px;resize:vertical;min-height:74px}
   textarea:focus{outline:none;border-color:var(--primary)}
+  .mycontact{margin-top:11px;background:#fff;border:1px dashed #F2C879;border-radius:10px;padding:11px 13px;font-size:12.5px;color:#92560C;line-height:1.7}
+  .mycontact b{color:#7C2D12}
   .submit{display:block;width:calc(100% - 48px);margin:18px 24px 22px;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:14px;font-weight:800;font-size:16px;cursor:pointer}
   .submit:disabled{opacity:.6}
   .err{color:var(--accent);font-size:13px;font-weight:700;margin:0 24px 8px;display:none}
-  .done{display:none;padding:50px 30px;text-align:center}
+  .done{display:none;padding:46px 30px;text-align:center}
   .done .big{font-size:52px;margin-bottom:14px}
   .done h2{font-size:20px;font-weight:800;margin-bottom:10px}
   .done p{font-size:14px;color:var(--grey)}
+  .donecontact{margin:18px auto 0;max-width:430px;background:#F0F7FA;border:1px solid #BFE3EE;border-radius:12px;padding:15px 18px;font-size:13.5px;color:var(--ink);line-height:1.85;text-align:left}
+  .donecontact b{color:var(--primary-d)}
   .foot{text-align:center;color:#9CA3AF;font-size:11.5px;margin-top:14px}
 </style>
 </head>
@@ -51,127 +47,90 @@
 <div class="wrap">
   <div class="card" id="card">
     <div class="head">
-      <h1>長照 AI 工具箱・使用回饋</h1>
-      <span class="pill">📱 手機 3 分鐘 · 幾乎都用點的</span>
+      <h1>長照 AI 工具箱・你還想要什麼？</h1>
+      <span class="pill">🙋 情境許願 · 手機 3 分鐘</span>
     </div>
     <div class="intro">
-      嗨，我是阿峰 👋 上次工作坊跟大家分享的那個「長照 AI 工具箱」（免登入、打開就能用的網站），我想把它越改越好用、越貼近你每天的工作。<br><br>
-      這份不是考試、沒有對錯，幫我勾幾題就好，最後一題想寫再寫。<b>你勾的每一個，下一版我就照著改。</b>
+      嗨，我是阿峰 👋 工具箱最近升級了，加了很多現成範本。<br><br>
+      但我更想知道——<b>你工作上「還有哪些麻煩事、哪些情境」，希望 AI 也能幫你？</b>你許的願，我會一個一個幫你做進工具箱。沒有對錯、想到什麼就寫什麼，幾乎都用點選的。
     </div>
 
     <form id="f">
+      <!-- Q1 職類 -->
       <div class="q">
-        <div class="qt"><span class="num">1</span>工作坊之後，你有再自己打開來用過嗎？<span class="star"> *</span></div>
+        <div class="qt"><span class="num">1</span>你的工作主要是？<span class="star"> *</span></div>
         <div class="opts" data-q="q1" data-type="single">
-          <label class="o"><input type="radio" name="q1" value="有，常常用">有，常常用</label>
-          <label class="o"><input type="radio" name="q1" value="有，用過幾次">有，用過幾次</label>
-          <label class="o"><input type="radio" name="q1" value="上課當下用過，後來沒再開">上課當下用過，後來沒再開</label>
-          <label class="o"><input type="radio" name="q1" value="還沒打開過">還沒打開過（沒關係，老實勾就好）</label>
+          <label class="o"><input type="radio" name="q1" value="行政／總務">🗂️ 行政／總務</label>
+          <label class="o"><input type="radio" name="q1" value="護理師">🩺 護理師</label>
+          <label class="o"><input type="radio" name="q1" value="照服員">💪 照服員</label>
+          <label class="o"><input type="radio" name="q1" value="居服員／日照">🏠 居服員／日照</label>
+          <label class="o"><input type="radio" name="q1" value="社工">🤝 社工</label>
+          <label class="o"><input type="radio" name="q1" value="主管／負責人">👔 主管／負責人</label>
+          <label class="o"><input type="radio" name="q1" value="其他">其他（營養、復健、廚房等）</label>
         </div>
       </div>
+      <!-- Q2 想交給AI的情境 -->
       <div class="q">
-        <div class="qt"><span class="num">2</span>你的工作主要是？<span class="star"> *</span></div>
-        <div class="opts" data-q="q2" data-type="single">
-          <label class="o"><input type="radio" name="q2" value="行政／總務">🗂️ 行政／總務</label>
-          <label class="o"><input type="radio" name="q2" value="護理師">🩺 護理師</label>
-          <label class="o"><input type="radio" name="q2" value="照服員">💪 照服員</label>
-          <label class="o"><input type="radio" name="q2" value="居服員／日照">🏠 居服員／日照</label>
-          <label class="o"><input type="radio" name="q2" value="社工">🤝 社工</label>
-          <label class="o"><input type="radio" name="q2" value="主管／負責人">👔 主管／負責人</label>
-          <label class="o"><input type="radio" name="q2" value="其他">其他（營養、復健、廚房等）</label>
+        <div class="qt"><span class="num">2</span>你工作上「最花時間、最想丟給 AI 幫忙」的是哪些事？<span class="opt"> 可複選</span><span class="star"> *</span></div>
+        <div class="opts" data-q="q2" data-type="multi">
+          <label class="o"><input type="checkbox" value="交班、護理紀錄">交班、護理紀錄</label>
+          <label class="o"><input type="checkbox" value="照顧計畫、評估說明">照顧計畫、評估說明</label>
+          <label class="o"><input type="checkbox" value="評鑑、自評、佐證">評鑑、自評、佐證</label>
+          <label class="o"><input type="checkbox" value="核銷、補助、公文申報">核銷、補助、公文申報</label>
+          <label class="o"><input type="checkbox" value="長照給付申報（BC碼等）">長照給付申報（BC 碼等）</label>
+          <label class="o"><input type="checkbox" value="家屬溝通、客訴、關懷">家屬溝通、客訴、關懷</label>
+          <label class="o"><input type="checkbox" value="活動企劃、文宣、海報">活動企劃、文宣、海報</label>
+          <label class="o"><input type="checkbox" value="排班、人力、人資庶務">排班、人力、人資庶務</label>
+          <label class="o"><input type="checkbox" value="衛教、住民／家屬說明">衛教、住民／家屬說明</label>
+          <label class="o"><input type="checkbox" value="會議、個案研討記錄">會議、個案研討記錄</label>
+          <label class="o"><input type="checkbox" value="其他（下一題告訴我）">其他（下一題告訴我）</label>
         </div>
       </div>
+      <!-- Q3 最想補的情境（核心） -->
       <div class="q">
-        <div class="qt"><span class="num">3</span>這幾個功能，你「真的有打開用過」哪些？<span class="opt"> 可複選</span><span class="star"> *</span></div>
-        <div class="opts" data-q="q3" data-type="multi">
-          <label class="o"><input type="checkbox" value="文案">📝 文案（填一填，貼到 ChatGPT／Gemini 幫你寫東西）</label>
-          <label class="o"><input type="checkbox" value="出圖">🎨 出圖（做衛教單、活動海報、評鑑圖）</label>
-          <label class="o"><input type="checkbox" value="研究">🔍 研究（查法規、評鑑、給付規定）</label>
-          <label class="o"><input type="checkbox" value="小工具">🔧 小工具（會幫你生一個可分享的小網頁）</label>
-          <label class="o"><input type="checkbox" value="跟著做">🧩 跟著做（評鑑、核銷整套步驟串起來）</label>
-          <label class="o"><input type="checkbox" value="都沒用過">我還沒真的用過任何一個</label>
+        <div class="qt"><span class="num">3</span>有沒有「你天天在做、但工具箱還沒幫到你」的事？最想要我多做哪一種？<span class="opt"> 這題最重要</span><span class="star"> *</span></div>
+        <textarea id="q3" placeholder="例如：我每個月要做○○，現在還是手寫／用 Excel，超花時間，希望能…"></textarea>
+      </div>
+      <!-- Q4 理想工具 -->
+      <div class="q">
+        <div class="qt"><span class="num">4</span>如果 AI 能幫你「一鍵做出一個東西」，你最想要什麼？<span class="opt"> 想到再寫，可跳過</span></div>
+        <textarea id="q4" placeholder="例如：輸入一句話就生出家屬通知／自動把流水帳算好／一鍵排好班…"></textarea>
+      </div>
+      <!-- Q5 願否給真實案例 -->
+      <div class="q">
+        <div class="qt"><span class="num">5</span>你手邊有沒有真實的例子（流水帳、表格、會議錄音…），願意去識別化後給老師，做成你機構專屬的範例？<span class="star"> *</span></div>
+        <div class="opts" data-q="q5" data-type="single">
+          <label class="o"><input type="radio" name="q5" value="願意，我可以提供">願意，我可以提供（老師幫我做專屬範例）</label>
+          <label class="o"><input type="radio" name="q5" value="再考慮看看">再考慮看看</label>
+          <label class="o"><input type="radio" name="q5" value="目前沒有">目前沒有</label>
         </div>
       </div>
-      <div class="q">
-        <div class="qt"><span class="num">4</span>切到「你自己的身分」那一頁，裡面的範例句貼不貼近你的工作？<span class="star"> *</span></div>
-        <div class="opts" data-q="q4" data-type="single">
-          <label class="o"><input type="radio" name="q4" value="很貼，幾乎都用得上">很貼，幾乎都用得上</label>
-          <label class="o"><input type="radio" name="q4" value="還可以，一半用得上">還可以，一半左右用得上</label>
-          <label class="o"><input type="radio" name="q4" value="有點空，少了我常做的事">有點空，少了我常做的事</label>
-          <label class="o"><input type="radio" name="q4" value="我沒找到自己的身分頁">我沒找到自己的身分頁</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="qt"><span class="num">5</span>用的時候，最常卡在哪？<span class="opt"> 可複選・沒卡就跳過</span></div>
-        <div class="opts" data-q="q5" data-type="multi">
-          <label class="o"><input type="checkbox" value="不知道選哪個、會迷路">不知道要選哪個、有點迷路</label>
-          <label class="o"><input type="checkbox" value="格子不知道填什麼">格子不知道要填什麼</label>
-          <label class="o"><input type="checkbox" value="複製後不知道貼到哪">複製出來後，不知道貼到哪、怎麼貼到 ChatGPT</label>
-          <label class="o"><input type="checkbox" value="AI給的還要改很多">貼過去後，AI 給的還要改很多才能用</label>
-          <label class="o"><input type="checkbox" value="怕貼到個資">怕不小心把住民名字、資料貼進去</label>
-          <label class="o"><input type="checkbox" value="手機難按">手機上字太小、按鈕太難按</label>
-          <label class="o"><input type="checkbox" value="都很順">我用起來都很順，沒卡過</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="qt"><span class="num">6</span>你最希望「多加」什麼？<span class="opt"> 最多選 2 個</span></div>
-        <div class="opts" data-q="q6" data-type="multi" data-max="2">
-          <label class="o"><input type="checkbox" value="多一點我這職類的範例句">多一點我這個工作會用到的範例句</label>
-          <label class="o"><input type="checkbox" value="多一點出圖">多一點出圖的圖（衛教單、海報、評鑑圖）</label>
-          <label class="o"><input type="checkbox" value="多一點查法規指令">多一點查法規／評鑑／給付的指令</label>
-          <label class="o"><input type="checkbox" value="多一點小工具">多一點小工具</label>
-          <label class="o"><input type="checkbox" value="用講的就能填">用「講的」就能填（不用打字）</label>
-          <label class="o"><input type="checkbox" value="看別人填好的成品">看別人填好的成品長怎樣（範例庫）</label>
-          <label class="o"><input type="checkbox" value="教學影片">手把手教學影片</label>
-          <label class="o"><input type="checkbox" value="夠用了">現在這樣就夠用了</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="qt"><span class="num">7</span>整體用起來，會不會難？<span class="star"> *</span></div>
-        <div class="opts" data-q="q7" data-type="single">
-          <label class="o"><input type="radio" name="q7" value="很好用，自己就會">很好用，自己一個人就會</label>
-          <label class="o"><input type="radio" name="q7" value="還行，偶爾要想一下">還行，偶爾要想一下</label>
-          <label class="o"><input type="radio" name="q7" value="有點難，常卡住">有點難，常常卡住</label>
-          <label class="o"><input type="radio" name="q7" value="太難了，幾乎不會用">太難了，我幾乎不會用</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="qt"><span class="num">8</span>你會想揪同事一起用嗎？<span class="star"> *</span></div>
-        <div class="faces" data-q="q8" data-type="single">
-          <label class="face"><input type="radio" name="q8" value="會，我會主動揪"><span class="em">😀</span>會，我會主動揪</label>
-          <label class="face"><input type="radio" name="q8" value="同事問我才會講"><span class="em">🙂</span>同事問我才會講</label>
-          <label class="face"><input type="radio" name="q8" value="目前不會"><span class="em">😐</span>目前不會</label>
-        </div>
-      </div>
-      <div class="q">
-        <div class="qt"><span class="num">9</span>最後，想跟阿峰說一句話嗎？<span class="opt"> 想寫再寫，不想寫跳過</span></div>
-        <textarea id="q9" placeholder="哪裡好用、哪裡想罵、想加什麼都可以…"></textarea>
-      </div>
-
+      <!-- Q6 邀課 -->
       <div class="q invite">
-        <div class="qt"><span class="num">10</span>你的機構有沒有興趣，請阿峰老師去上一堂 AI 課？<span class="opt"> 今年下半年正在排課</span><span class="star"> *</span></div>
-        <div class="opts" data-q="q10" data-type="single">
-          <label class="o"><input type="radio" name="q10" value="有！想請老師來機構上課">有！想請老師來機構上課</label>
-          <label class="o"><input type="radio" name="q10" value="想先了解、可以跟我聯絡">想先了解看看，可以跟我聯絡</label>
-          <label class="o"><input type="radio" name="q10" value="我幫機構問問看／轉給主管">我幫機構問問看／轉給主管</label>
-          <label class="o"><input type="radio" name="q10" value="目前沒有這個需求">目前沒有這個需求</label>
+        <div class="qt"><span class="num">6</span>你的機構有沒有興趣，請阿峰老師今年下半年去上一堂 AI 課？<span class="star"> *</span></div>
+        <div class="opts" data-q="q6" data-type="single">
+          <label class="o"><input type="radio" name="q6" value="有！想請老師來機構上課">有！想請老師來機構上課</label>
+          <label class="o"><input type="radio" name="q6" value="想先了解、可以跟我聯絡">想先了解看看，可以跟我聯絡</label>
+          <label class="o"><input type="radio" name="q6" value="我幫機構問問看／轉給主管">我幫機構問問看／轉給主管</label>
+          <label class="o"><input type="radio" name="q6" value="目前沒有這個需求">目前沒有這個需求</label>
         </div>
       </div>
+      <!-- Q7 機構+聯絡 -->
       <div class="q invite">
-        <div class="qt"><span class="num">11</span>有興趣的話，留下你的機構與聯絡方式，老師會親自跟你約<span class="opt"> 上面有勾前三個再填</span></div>
-        <textarea id="q11" placeholder="機構名稱／你的職稱＋姓名／聯絡方式（LINE、電話或 email）"></textarea>
+        <div class="qt"><span class="num">7</span>想邀課或想要專屬範例的話，留下你的機構與聯絡方式，老師會親自跟你聯繫<span class="opt"> 選填</span></div>
+        <textarea id="q7" placeholder="機構名稱／你的職稱＋姓名／聯絡方式（LINE、電話或 email）"></textarea>
         <div class="mycontact">想直接找老師也可以 👉 <b>阿峰老師（黃敬峰）</b>｜LINE／電話 0976-715-102｜Email ai@autolab.cloud｜網站 autolab.cloud</div>
       </div>
 
       <div class="err" id="err">還有必填（標 *）沒填到，往上看一下 🙏</div>
-      <button type="submit" class="submit" id="sb">送出回饋</button>
+      <button type="submit" class="submit" id="sb">送出許願</button>
     </form>
 
     <div class="done" id="done">
-      <div class="big">🙌</div>
-      <h2>收到了，謝謝你！</h2>
-      <p>你願意花這 3 分鐘，比客套的稱讚有用一百倍。<br>每一個勾選阿峰都會看，下一版會照你說的調。<br><br>會用、懂用、好用、每天用 —— 我們一起把工具箱磨到你天天想打開。<br>— 阿峰</p>
-      <div class="donecontact">想請老師到機構上課，或有任何問題，歡迎直接聯絡：<br><b>阿峰老師（黃敬峰）</b>　企業 AI 實戰培訓<br>📱 LINE／電話：0976-715-102<br>✉️ Email：ai@autolab.cloud<br>🌐 網站：autolab.cloud</div>
+      <div class="big">🌟</div>
+      <h2>收到你的許願了，謝謝！</h2>
+      <p>你寫的每一個情境，阿峰都會看，<br>有機會就把它做進工具箱、變成你能用的範本。<br><br>會用、懂用、好用、每天用 —— 我們一起把工具磨到貼著你的工作。<br>— 阿峰</p>
+      <div class="donecontact">想請老師到機構上課、想要專屬範例，或有任何問題，歡迎直接聯絡：<br><b>阿峰老師（黃敬峰）</b>　企業 AI 實戰培訓<br>📱 LINE／電話：0976-715-102<br>✉️ Email：ai@autolab.cloud<br>🌐 網站：autolab.cloud</div>
     </div>
   </div>
   <div class="foot">大人提 AI Agent 工作坊 · Autolab</div>
@@ -179,19 +138,16 @@
 
 <script>
 (function(){
-  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbzh4EGoEaNk45pIokCb34xhY2KSTL72PL-XVFcjThq1fRbYZQTANscBU-5_17WBU1o-xQ/exec';
+  var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyrlfPI5XtPFl1ceFklRy6pZtSxNddwZcqJcVrRfCYEuB2_vAJBT2EAnAg9BMs5xBsRAQ/exec';
   var $ = function(s,r){ return (r||document).querySelector(s); };
   var $$ = function(s,r){ return [].slice.call((r||document).querySelectorAll(s)); };
 
-  $$('.opts, .faces').forEach(function(box){
-    var type = box.dataset.type, max = parseInt(box.dataset.max||'0',10);
+  $$('.opts').forEach(function(box){
+    var type = box.dataset.type;
     $$('input', box).forEach(function(inp){
       inp.addEventListener('change', function(){
         if(type==='single'){ $$('label', box).forEach(function(l){ l.classList.remove('on'); }); inp.closest('label').classList.add('on'); }
-        else {
-          if(max){ var checked=$$('input:checked', box); if(checked.length>max){ inp.checked=false; return; } }
-          inp.closest('label').classList.toggle('on', inp.checked);
-        }
+        else { inp.closest('label').classList.toggle('on', inp.checked); }
       });
     });
   });
@@ -201,14 +157,12 @@
 
   $('#f').addEventListener('submit', function(ev){
     ev.preventDefault();
-    var data = { q1:val('q1'), q2:val('q2'), q3:vals('q3'), q4:val('q4'),
-      q5:vals('q5'), q6:vals('q6'), q7:val('q7'), q8:val('q8'), q9:($('#q9').value||'').trim(),
-      q10:val('q10'), q11:($('#q11').value||'').trim() };
-    if(!data.q1||!data.q2||!data.q3.length||!data.q4||!data.q7||!data.q8||!data.q10){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+    var data = { q1:val('q1'), q2:vals('q2'), q3:($('#q3').value||'').trim(), q4:($('#q4').value||'').trim(),
+      q5:val('q5'), q6:val('q6'), q7:($('#q7').value||'').trim() };
+    if(!data.q1||!data.q2.length||!data.q3||!data.q5||!data.q6){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
     $('#err').style.display='none';
     var btn=$('#sb'); btn.disabled=true; btn.textContent='送出中…';
-    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) })
-      .then(finish).catch(finish);
+    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) }).then(finish).catch(finish);
     function finish(){ $('#f').style.display='none'; $('#done').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); }
   });
 })();
