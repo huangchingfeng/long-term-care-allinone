@@ -15,6 +15,8 @@
   .head .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:12.5px}
   .intro{padding:17px 24px;font-size:13.5px;color:var(--grey);border-bottom:1px solid var(--line);background:#F8FBFC}
   .q{padding:19px 24px;border-bottom:1px solid var(--line)}
+  .q.invite{background:#FFF6E9}
+  .q.invite .num{color:var(--accent)}
   .qt{font-size:15px;font-weight:700;margin-bottom:11px}
   .qt .num{color:var(--primary);font-weight:800;margin-right:5px}
   .qt .opt{color:var(--grey);font-size:12px;font-weight:600}
@@ -142,6 +144,20 @@
         <textarea id="q9" placeholder="哪裡好用、哪裡想罵、想加什麼都可以…"></textarea>
       </div>
 
+      <div class="q invite">
+        <div class="qt"><span class="num">10</span>你的機構有沒有興趣，請阿峰老師去上一堂 AI 課？<span class="opt"> 今年下半年正在排課</span><span class="star"> *</span></div>
+        <div class="opts" data-q="q10" data-type="single">
+          <label class="o"><input type="radio" name="q10" value="有！想請老師來機構上課">有！想請老師來機構上課</label>
+          <label class="o"><input type="radio" name="q10" value="想先了解、可以跟我聯絡">想先了解看看，可以跟我聯絡</label>
+          <label class="o"><input type="radio" name="q10" value="我幫機構問問看／轉給主管">我幫機構問問看／轉給主管</label>
+          <label class="o"><input type="radio" name="q10" value="目前沒有這個需求">目前沒有這個需求</label>
+        </div>
+      </div>
+      <div class="q invite">
+        <div class="qt"><span class="num">11</span>若有興趣，留個聯絡方式，老師會親自跟你聯繫<span class="opt"> 上面有勾前三個再填就好</span></div>
+        <textarea id="q11" placeholder="機構名稱／你的稱呼／LINE 或電話或 email"></textarea>
+      </div>
+
       <div class="err" id="err">還有必填（標 *）沒填到，往上看一下 🙏</div>
       <button type="submit" class="submit" id="sb">送出回饋</button>
     </form>
@@ -180,8 +196,9 @@
   $('#f').addEventListener('submit', function(ev){
     ev.preventDefault();
     var data = { q1:val('q1'), q2:val('q2'), q3:vals('q3'), q4:val('q4'),
-      q5:vals('q5'), q6:vals('q6'), q7:val('q7'), q8:val('q8'), q9:($('#q9').value||'').trim() };
-    if(!data.q1||!data.q2||!data.q3.length||!data.q4||!data.q7||!data.q8){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
+      q5:vals('q5'), q6:vals('q6'), q7:val('q7'), q8:val('q8'), q9:($('#q9').value||'').trim(),
+      q10:val('q10'), q11:($('#q11').value||'').trim() };
+    if(!data.q1||!data.q2||!data.q3.length||!data.q4||!data.q7||!data.q8||!data.q10){ $('#err').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); return; }
     $('#err').style.display='none';
     var btn=$('#sb'); btn.disabled=true; btn.textContent='送出中…';
     fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) })
