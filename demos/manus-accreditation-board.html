@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>評鑑佐證進度追蹤看板 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 評鑑佐證進度追蹤看板</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<h2>🏆 評鑑佐證進度追蹤看板 — 示範</h2>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px">
+  <span class="stat"><span class="stat-n" style="color:#0D9488">12</span><div class="stat-l">已完成</div></span>
+  <span class="stat"><span class="stat-n" style="color:#F59E0B">6</span><div class="stat-l">進行中</div></span>
+  <span class="stat"><span class="stat-n" style="color:#EF4444">5</span><div class="stat-l">待完成</div></span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:16px">
+
+<div class="card" style="border-top:4px solid #0D9488">
+  <h3 style="font-size:.9rem;color:#134E4A;margin-bottom:10px">✅ 已完成 (12)</h3>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 服務契約（住民簽署）<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 個別照顧計畫（最近 1 季）<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 在職教育訓練記錄（2025 年）<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 緊急疏散演練記錄<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 藥品管理稽核表<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 感染管制月報<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 身體約束紀錄 (0 件)<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 住民滿意度調查<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 家屬滿意度調查<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 跌倒預防措施說明<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 膳食及營養衛教記錄<span class="tag green" style="float:right">✓</span></div>
+    <div style="background:#F0FDF4;border-radius:6px;padding:8px 10px;font-size:.83rem">📄 機構簡介與服務說明手冊<span class="tag green" style="float:right">✓</span></div>
+  </div>
+</div>
+
+<div class="card" style="border-top:4px solid #F59E0B">
+  <h3 style="font-size:.9rem;color:#92400E;margin-bottom:10px">🔄 進行中 (6)</h3>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 出院準備計畫（整理中）<span class="tag yellow" style="float:right">進行中</span></div>
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 新進員工訓練資料補齊<span class="tag yellow" style="float:right">進行中</span></div>
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 住民照片同意書（7 位未簽）<span class="tag yellow" style="float:right">進行中</span></div>
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 品管會議記錄（Q2 補開）<span class="tag yellow" style="float:right">進行中</span></div>
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 評鑑自評報告（撰寫中）<span class="tag yellow" style="float:right">進行中</span></div>
+    <div style="background:#FFFBEB;border-radius:6px;padding:8px 10px;font-size:.83rem">📋 佐證照片整理（150 張分類中）<span class="tag yellow" style="float:right">進行中</span></div>
+  </div>
+</div>
+
+<div class="card" style="border-top:4px solid #EF4444">
+  <h3 style="font-size:.9rem;color:#991B1B;margin-bottom:10px">⏳ 待完成 (5)</h3>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <div style="background:#FEF2F2;border-radius:6px;padding:8px 10px;font-size:.83rem">❗ 消防安全演練（7/15 前）<span class="tag red" style="float:right">未開始</span></div>
+    <div style="background:#FEF2F2;border-radius:6px;padding:8px 10px;font-size:.83rem">❗ 廁所防滑改善確認<span class="tag red" style="float:right">未開始</span></div>
+    <div style="background:#FEF2F2;border-radius:6px;padding:8px 10px;font-size:.83rem">❗ 外聘委員委任狀更新<span class="tag red" style="float:right">未開始</span></div>
+    <div style="background:#FEF2F2;border-radius:6px;padding:8px 10px;font-size:.83rem">❗ 勞務外包契約補附<span class="tag red" style="float:right">未開始</span></div>
+    <div style="background:#FEF2F2;border-radius:6px;padding:8px 10px;font-size:.83rem">❗ 失智症照護訓練時數補足<span class="tag red" style="float:right">未開始</span></div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

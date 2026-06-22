@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>活動報名＋簽到＋滿意度系統 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 活動報名＋簽到＋滿意度系統</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+  <button class="btn-p" onclick="showTab('info')">📋 活動資訊</button>
+  <button class="btn-p" onclick="showTab('signin')" style="background:#475569">✅ 簽到紀錄</button>
+  <button class="btn-p" onclick="showTab('survey')" style="background:#475569">📊 滿意度統計</button>
+</div>
+
+<div id="tab-info">
+<div class="card">
+  <h2 style="margin-top:0">🎉 六月份健康促進活動</h2>
+  <table style="margin-top:8px">
+    <tr><td style="width:100px;color:#666">活動名稱</td><td><b>長輩體適能與音樂律動</b></td></tr>
+    <tr><td>日期時間</td><td>2026/06/25（三）09:30–11:30</td></tr>
+    <tr><td>地點</td><td>機構多功能活動室</td></tr>
+    <tr><td>帶領者</td><td>職能治療師 A</td></tr>
+    <tr><td>報名人數</td><td>12 人（住民 10 + 家屬 2）</td></tr>
+    <tr><td>實到人數</td><td>10 人</td></tr>
+    <tr><td>缺席</td><td>住民代號 E-003（身體不適）、住民代號 E-007（外出回診）</td></tr>
+  </table>
+</div>
+</div>
+
+<div id="tab-signin" style="display:none">
+<h2>✅ 簽到紀錄 — 示範資料</h2>
+<table>
+<tr><th>序</th><th>參與者代號</th><th>身分</th><th>簽到時間</th><th>狀態</th><th>備註</th></tr>
+<tr><td>1</td><td>住民 A-001</td><td>住民</td><td>09:25</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>2</td><td>住民 A-002</td><td>住民</td><td>09:28</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>3</td><td>住民 A-004</td><td>住民</td><td>09:30</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>4</td><td>住民 A-005</td><td>住民</td><td>09:32</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>5</td><td>住民 A-006</td><td>住民</td><td>09:31</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>6</td><td>住民 A-008</td><td>住民</td><td>09:35</td><td><span class="tag green">✓ 出席</span></td><td>輪椅參與</td></tr>
+<tr><td>7</td><td>住民 A-009</td><td>住民</td><td>09:29</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>8</td><td>住民 A-010</td><td>住民</td><td>09:33</td><td><span class="tag green">✓ 出席</span></td><td></td></tr>
+<tr><td>9</td><td>家屬代甲</td><td>家屬</td><td>09:30</td><td><span class="tag green">✓ 出席</span></td><td>陪同住民甲</td></tr>
+<tr><td>10</td><td>家屬代乙</td><td>家屬</td><td>09:45</td><td><span class="tag green">✓ 出席</span></td><td>遲到</td></tr>
+<tr><td>—</td><td>住民 E-003</td><td>住民</td><td>—</td><td><span class="tag red">✗ 缺席</span></td><td>身體不適</td></tr>
+<tr><td>—</td><td>住民 E-007</td><td>住民</td><td>—</td><td><span class="tag yellow">外出</span></td><td>回診</td></tr>
+</table>
+</div>
+
+<div id="tab-survey" style="display:none">
+<h2>📊 滿意度統計 — 示範資料（有效問卷 9 份）</h2>
+<div class="card">
+  <b>整體滿意度</b>
+  <div style="font-size:2rem;font-weight:800;color:#0D9488;margin:8px 0">4.7 / 5</div>
+  <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px">
+    <div><span style="font-size:.85rem">非常滿意（5）</span><div class="prog-bar"><div class="prog-fill" style="width:67%;background:#0D9488"></div></div><span style="font-size:.8rem">6 人（67%）</span></div>
+    <div><span style="font-size:.85rem">滿意（4）</span><div class="prog-bar"><div class="prog-fill" style="width:22%;background:#22C55E"></div></div><span style="font-size:.8rem">2 人（22%）</span></div>
+    <div><span style="font-size:.85rem">普通（3）</span><div class="prog-bar"><div class="prog-fill" style="width:11%;background:#F59E0B"></div></div><span style="font-size:.8rem">1 人（11%）</span></div>
+  </div>
+</div>
+<div class="card" style="margin-top:8px">
+  <b>💬 文字回饋（示範）</b>
+  <ul style="margin-top:8px;font-size:.87rem;padding-left:18px">
+    <li>「老人家很開心，笑聲很多」</li>
+    <li>「帶領者有耐心，動作示範清楚」</li>
+    <li>「時間太短，希望多辦幾次」</li>
+    <li>「音樂選得好，很有氣氛」</li>
+  </ul>
+</div>
+</div>
+
+<script>
+function showTab(t){
+  ['info','signin','survey'].forEach(function(id){
+    document.getElementById('tab-'+id).style.display=(id===t?'':'none');
+  });
+}
+</script>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>家屬通知訊息產生器 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 家屬通知訊息產生器</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<h2>💬 家屬通知訊息產生器 — 示範</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div>
+  <div class="card">
+    <h3 style="font-size:.95rem;margin-bottom:12px">填寫內容</h3>
+    <label>住民代號</label><input id="nm" value="住民甲">
+    <label>通知主旨</label>
+    <select id="tp">
+      <option>近況說明</option>
+      <option>用藥調整</option>
+      <option>返家探視建議</option>
+      <option>醫療異常通報</option>
+      <option>活動邀請</option>
+    </select>
+    <label>具體說明</label>
+    <textarea id="detail" rows="3" placeholder="請填寫說明（示範：近一週食量略減，已請護理師追蹤）">近一週食量略減，已請護理師追蹤，生命徵象穩定，請家屬留意。</textarea>
+    <label>建議家屬動作</label><input id="action" value="如有疑問歡迎致電機構或安排探視">
+    <button class="btn-p" style="margin-top:10px;width:100%" onclick="generate()">🔄 產生通知</button>
+  </div>
+</div>
+<div>
+  <div class="card">
+    <h3 style="font-size:.95rem;margin-bottom:8px">📄 產生的通知（可複製發送）</h3>
+    <div id="output" style="background:#f8fafc;border-radius:8px;padding:12px;font-size:.87rem;min-height:180px;white-space:pre-wrap;line-height:1.7"></div>
+    <button class="btn-p" style="margin-top:10px;width:100%;background:#475569" onclick="copyMsg()">📋 複製訊息</button>
+  </div>
+  <div class="card" style="margin-top:10px">
+    <b>📌 範例通知</b>
+    <div style="font-size:.83rem;color:#475569;margin-top:6px;background:#f8fafc;padding:10px;border-radius:6px;line-height:1.7">親愛的家屬，您好：<br>
+住民甲近況說明：本週體溫、血壓、血氧均正常，精神狀況良好，有參與院內音樂活動，反應不錯。<br>
+如有任何疑問，歡迎致電機構或預約探視，謝謝您的關心。<br>
+——○○長照機構 護理站</div>
+  </div>
+</div>
+</div>
+<script>
+function generate(){
+  var nm=document.getElementById('nm').value||'住民';
+  var tp=document.getElementById('tp').value;
+  var detail=document.getElementById('detail').value;
+  var action=document.getElementById('action').value;
+  var date=new Date().toLocaleDateString('zh-TW');
+  var msg='親愛的家屬，您好：\n\n' +
+    '以下是關於 '+nm+' 的'+tp+'通知（'+date+'）：\n\n'+
+    detail+'\n\n'+
+    '建議：'+action+'\n\n'+
+    '如有任何疑問，歡迎來電洽詢，謝謝您。\n——機構護理站';
+  document.getElementById('output').textContent=msg;
+}
+function copyMsg(){
+  var t=document.getElementById('output').textContent;
+  if(!t){alert('請先產生通知');return;}
+  navigator.clipboard.writeText(t).then(function(){alert('已複製！可貼到 LINE 傳送');});
+}
+generate();
+</script>
+
+</div>
+
+</body>
+</html>

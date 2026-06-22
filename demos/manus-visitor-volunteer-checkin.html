@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>訪客志工登記與健康聲明系統 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 訪客志工登記與健康聲明系統</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<div style="display:flex;gap:10px;margin-bottom:12px">
+  <button class="btn-p" onclick="showTab('reg')">📝 來訪登記</button>
+  <button class="btn-p" onclick="showTab('list')" style="background:#475569">📋 訪客紀錄（示範資料）</button>
+</div>
+
+<div id="tab-reg">
+<div class="card">
+  <h2 style="margin-top:0">來訪登記表</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div><label>來訪者姓名</label><input placeholder="請輸入姓名"></div>
+    <div><label>與住民關係</label><select><option>家屬</option><option>志工</option><option>廠商</option><option>外部訪客</option></select></div>
+    <div><label>探訪住民（代號）</label><input placeholder="例：住民甲"></div>
+    <div><label>來訪日期時間</label><input type="datetime-local"></div>
+  </div>
+  <div style="margin-top:12px;background:#FEF2F2;border-radius:8px;padding:12px">
+    <b>🏥 健康聲明（請確認後勾選）</b>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;font-size:.88rem">
+      <label style="font-weight:400;display:flex;align-items:center;gap:8px"><input type="checkbox"> 今日無發燒、咳嗽、喉嚨痛等症狀</label>
+      <label style="font-weight:400;display:flex;align-items:center;gap:8px"><input type="checkbox"> 近 14 天未接觸確診者</label>
+      <label style="font-weight:400;display:flex;align-items:center;gap:8px"><input type="checkbox"> 同意接受體溫量測</label>
+    </div>
+  </div>
+  <button class="btn-p" style="margin-top:14px" onclick="alert('示範模式：登記成功！實際系統會寫入資料庫')">確認登記</button>
+</div>
+</div>
+
+<div id="tab-list" style="display:none">
+<h2>訪客登記紀錄 — 示範資料（近 7 天）</h2>
+<table>
+<tr><th>日期時間</th><th>訪客姓名</th><th>關係</th><th>探訪住民</th><th>健康聲明</th><th>體溫</th></tr>
+<tr><td>06/22 14:30</td><td>陳 ○ 明</td><td>家屬</td><td>住民甲</td><td><span class="tag green">✓ 通過</span></td><td>36.2°C</td></tr>
+<tr><td>06/22 10:15</td><td>李 ○ 芬</td><td>志工</td><td>—</td><td><span class="tag green">✓ 通過</span></td><td>36.5°C</td></tr>
+<tr><td>06/21 15:00</td><td>王 ○ 雄</td><td>家屬</td><td>住民乙</td><td><span class="tag green">✓ 通過</span></td><td>36.1°C</td></tr>
+<tr><td>06/21 09:30</td><td>林 ○ 美</td><td>志工</td><td>—</td><td><span class="tag green">✓ 通過</span></td><td>36.3°C</td></tr>
+<tr><td>06/20 16:20</td><td>張 ○ 山</td><td>家屬</td><td>住民丙</td><td><span class="tag yellow">⚠ 輕咳（補說明）</span></td><td>36.8°C</td></tr>
+<tr><td>06/20 11:00</td><td>醫療器材商</td><td>廠商</td><td>—</td><td><span class="tag green">✓ 通過</span></td><td>36.4°C</td></tr>
+<tr><td>06/19 14:00</td><td>吳 ○ 翠</td><td>家屬</td><td>住民甲</td><td><span class="tag green">✓ 通過</span></td><td>36.2°C</td></tr>
+</table>
+</div>
+
+<script>
+function showTab(t){
+  document.getElementById('tab-reg').style.display=t==='reg'?'':'none';
+  document.getElementById('tab-list').style.display=t==='list'?'':'none';
+}
+</script>
+
+</div>
+
+</body>
+</html>

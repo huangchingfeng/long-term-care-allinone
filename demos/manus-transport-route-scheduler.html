@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>接送排班路線小工具 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 接送排班路線小工具</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<h2>🚐 接送排班路線小工具 — 示範</h2>
+<p style="font-size:.83rem;color:#666;margin-bottom:12px">本週排班：2026/06/23（一）—— 06/27（五）｜ 日照中心</p>
+<div style="overflow-x:auto">
+<table>
+<tr><th>路線</th><th>司機代號</th><th>車輛</th><th>週一</th><th>週二</th><th>週三</th><th>週四</th><th>週五</th><th>接送人數</th></tr>
+<tr>
+  <td><b>路線甲</b><br><span style="font-size:.78rem;color:#666">北區 → 機構</span></td>
+  <td>D-001</td><td>中型廂車</td>
+  <td style="background:#DCFCE7">06:50出發</td>
+  <td style="background:#DCFCE7">06:50出發</td>
+  <td style="background:#DCFCE7">06:50出發</td>
+  <td style="background:#DCFCE7">06:50出發</td>
+  <td style="background:#DCFCE7">06:50出發</td>
+  <td>5人（4長輩+1陪同）</td>
+</tr>
+<tr>
+  <td><b>路線乙</b><br><span style="font-size:.78rem;color:#666">南區 → 機構</span></td>
+  <td>D-002</td><td>小型廂車</td>
+  <td style="background:#DCFCE7">07:10出發</td>
+  <td style="background:#DCFCE7">07:10出發</td>
+  <td style="background:#FEF3C7">D-003 代班</td>
+  <td style="background:#DCFCE7">07:10出發</td>
+  <td style="background:#DCFCE7">07:10出發</td>
+  <td>4人</td>
+</tr>
+<tr>
+  <td><b>路線丙</b><br><span style="font-size:.78rem;color:#666">東區 → 機構</span></td>
+  <td>D-003</td><td>無障礙車</td>
+  <td style="background:#DCFCE7">07:30出發</td>
+  <td style="background:#FEE2E2;border:2px solid #EF4444">⚠ 車輛保養</td>
+  <td style="background:#DCFCE7">07:30出發</td>
+  <td style="background:#DCFCE7">07:30出發</td>
+  <td style="background:#DCFCE7">07:30出發</td>
+  <td>3人（含輪椅2）</td>
+</tr>
+<tr>
+  <td><b>路線丁</b><br><span style="font-size:.78rem;color:#666">市區 → 回診接送</span></td>
+  <td>D-001</td><td>中型廂車</td>
+  <td>—</td>
+  <td>—</td>
+  <td style="background:#DBEAFE">13:00 出發</td>
+  <td>—</td>
+  <td>—</td>
+  <td>2人（週三醫院回診）</td>
+</tr>
+</table>
+</div>
+<div class="card" style="margin-top:14px">
+  <b>📋 本週注意事項</b>
+  <ul style="padding-left:18px;font-size:.87rem;margin-top:8px">
+    <li>路線丙週二（6/24）車輛定期保養，已安排 D-002 小型廂車代送（載客數 3 人，需確認輪椅可否折疊）</li>
+    <li>路線乙週三 D-003 代班（因支援路線丙），請確認乙路線住民已告知家屬</li>
+    <li>週三下午路線丁：回診接送需提前聯繫醫院停車接送入口</li>
+  </ul>
+</div>
+<div class="card" style="margin-top:10px">
+  <b>📍 本週接送人員名冊（去識別化）</b>
+  <table style="margin-top:8px;font-size:.85rem">
+    <tr><th>代號</th><th>路線</th><th>特殊需求</th><th>緊急聯絡人</th></tr>
+    <tr><td>住民代 P-01</td><td>路線甲</td><td>無</td><td>家屬甲（已留號）</td></tr>
+    <tr><td>住民代 P-02</td><td>路線甲</td><td>糖尿病飲食</td><td>家屬乙</td></tr>
+    <tr><td>住民代 P-05</td><td>路線丙</td><td>電動輪椅</td><td>家屬丙</td></tr>
+    <tr><td>住民代 P-06</td><td>路線丙</td><td>手動輪椅</td><td>家屬丁</td></tr>
+    <tr><td>住民代 P-09</td><td>路線乙</td><td>行動緩慢</td><td>家屬戊</td></tr>
+  </table>
+</div>
+
+</div>
+
+</body>
+</html>

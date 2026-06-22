@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>跌倒異常事件通報＋月統計工具 — 長照微系統示範</title>
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;background:#f0f4f8;color:#1a202c;min-height:100vh}
+.hdr{background:#0D9488;color:#fff;padding:14px 20px;display:flex;align-items:center;gap:10px}
+.hdr h1{font-size:1.1rem;font-weight:700}
+.badge{background:#F59E0B;color:#fff;border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap}
+.wrap{max-width:960px;margin:0 auto;padding:18px}
+.notice{background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#92400E;margin-bottom:16px}
+h2{font-size:1rem;font-weight:700;margin:16px 0 10px;color:#134E4A}
+table{width:100%;border-collapse:collapse;font-size:.87rem}
+th{background:#0D9488;color:#fff;padding:8px 10px;text-align:left;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #e2e8f0}
+tr:hover td{background:#f0fdfa}
+.tag{display:inline-block;padding:2px 9px;border-radius:12px;font-size:.76rem;font-weight:700}
+.red{background:#FEE2E2;color:#991B1B}
+.yellow{background:#FEF3C7;color:#92400E}
+.green{background:#DCFCE7;color:#166534}
+.blue{background:#DBEAFE;color:#1E40AF}
+.card{background:#fff;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:16px;margin-bottom:14px}
+.stat{display:inline-block;text-align:center;min-width:90px;padding:10px 14px;border-radius:8px;background:#f0fdfa;margin:4px}
+.stat-n{font-size:1.6rem;font-weight:800;color:#0D9488}
+.stat-l{font-size:.78rem;color:#666;margin-top:2px}
+btn{cursor:pointer;padding:7px 16px;border:none;border-radius:6px;font-size:.88rem;font-weight:600}
+.btn-p{background:#0D9488;color:#fff;border-radius:6px;padding:7px 16px;border:none;font-size:.88rem;font-weight:600;cursor:pointer}
+.btn-p:hover{background:#0F766E}
+.prog-bar{height:14px;background:#e2e8f0;border-radius:7px;overflow:hidden;margin:4px 0}
+.prog-fill{height:100%;border-radius:7px;transition:width .3s}
+input,select,textarea{border:1px solid #CBD5E1;border-radius:6px;padding:7px 10px;font-size:.9rem;width:100%}
+label{font-size:.85rem;font-weight:600;color:#334155;display:block;margin:8px 0 3px}
+
+
+</style>
+</head>
+<body>
+<div class="hdr">
+  <h1>🔧 跌倒異常事件通報＋月統計工具</h1>
+  <span class="badge">示範模式</span>
+</div>
+<div class="wrap">
+  <div class="notice">⚠️ 本頁為示範資料，所有人名、機構名均為虛構。實際使用請輸入您機構的真實資料（測試時用假代號）。</div>
+
+<div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+  <button class="btn-p" onclick="showTab('form')">📝 填寫通報</button>
+  <button class="btn-p" onclick="showTab('stats')" style="background:#475569">📊 本月統計</button>
+  <button class="btn-p" onclick="showTab('log')" style="background:#475569">📋 通報紀錄</button>
+</div>
+
+<div id="tab-form">
+<div class="card">
+  <h2 style="margin-top:0">事件通報表單</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div><label>事件類型</label>
+    <select><option>跌倒</option><option>壓傷</option><option>異食</option><option>走失</option><option>藥物不良反應</option><option>其他</option></select></div>
+    <div><label>當事人代號</label><input placeholder="例：住民甲"></div>
+    <div><label>發生日期時間</label><input type="datetime-local"></div>
+    <div><label>發現者代號</label><input placeholder="員工代號"></div>
+    <div style="grid-column:1/-1"><label>事件經過（去識別化）</label>
+    <textarea rows="3" placeholder="請用代號描述事件，不要填真實姓名、病歷號"></textarea></div>
+    <div><label>立即處置</label><textarea rows="2" placeholder="已採取的處置措施"></textarea></div>
+    <div><label>傷害程度</label>
+    <select><option>無傷害</option><option>輕微（皮膚擦傷）</option><option>中度（需就醫）</option><option>嚴重（住院）</option></select></div>
+  </div>
+  <button class="btn-p" style="margin-top:12px" onclick="alert('示範模式：通報已提交！實際系統會存入資料庫並寄送主管通知')">📨 提交通報</button>
+</div>
+</div>
+
+<div id="tab-stats" style="display:none">
+<h2>📊 2026年6月 事件統計 — 示範資料</h2>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+  <span class="stat"><div class="stat-n" style="color:#EF4444">8</div><div class="stat-l">本月事件總數</div></span>
+  <span class="stat"><div class="stat-n" style="color:#F59E0B">5</div><div class="stat-l">跌倒</div></span>
+  <span class="stat"><div class="stat-n" style="color:#0D9488">2</div><div class="stat-l">壓傷</div></span>
+  <span class="stat"><div class="stat-n" style="color:#6366F1">1</div><div class="stat-l">其他</div></span>
+</div>
+<div class="card">
+  <b>跌倒事件分析</b>
+  <table style="margin-top:8px">
+    <tr><th>時段</th><th>次數</th><th>比例</th></tr>
+    <tr><td>早班（07:00–15:00）</td><td>2次</td><td><div class="prog-bar" style="width:150px;display:inline-block"><div class="prog-fill" style="width:40%;background:#0D9488"></div></div></td></tr>
+    <tr><td>晚班（15:00–23:00）</td><td>1次</td><td><div class="prog-bar" style="width:150px;display:inline-block"><div class="prog-fill" style="width:20%;background:#F59E0B"></div></div></td></tr>
+    <tr><td>夜班（23:00–07:00）</td><td>2次</td><td><div class="prog-bar" style="width:150px;display:inline-block"><div class="prog-fill" style="width:40%;background:#EF4444"></div></div></td></tr>
+  </table>
+</div>
+<div class="card" style="margin-top:8px">
+  <b>發生地點</b>
+  <table style="margin-top:8px">
+    <tr><th>地點</th><th>次數</th></tr>
+    <tr><td>浴室 / 廁所</td><td>2</td></tr>
+    <tr><td>床邊</td><td>2</td></tr>
+    <tr><td>走廊</td><td>1</td></tr>
+  </table>
+</div>
+<div class="card" style="margin-top:8px;background:#FEF3C7;border:1px solid #FCD34D">
+  <b>💡 改善建議（AI 自動分析）</b>
+  <ul style="margin-top:8px;padding-left:18px;font-size:.87rem">
+    <li>夜班跌倒比例偏高，建議加強夜間巡視頻率（每 2 小時一次）</li>
+    <li>浴室跌倒 2 次，建議檢查防滑墊狀況及扶手安裝</li>
+    <li>高跌倒風險住民名單（代號）本月應加強跌倒預防介入</li>
+  </ul>
+</div>
+</div>
+
+<div id="tab-log" style="display:none">
+<h2>📋 6月通報紀錄 — 示範資料</h2>
+<table>
+<tr><th>日期</th><th>類型</th><th>當事人</th><th>地點</th><th>傷害程度</th><th>處置</th></tr>
+<tr><td>06/21</td><td>跌倒</td><td>住民代甲</td><td>浴室</td><td><span class="tag yellow">輕微</span></td><td>消毒包紮、通知家屬</td></tr>
+<tr><td>06/19</td><td>壓傷</td><td>住民代乙</td><td>臥室</td><td><span class="tag yellow">輕微</span></td><td>換藥、調整翻身頻率</td></tr>
+<tr><td>06/17</td><td>跌倒</td><td>住民代丙</td><td>走廊</td><td><span class="tag green">無傷</span></td><td>協助站立、評估步態</td></tr>
+<tr><td>06/15</td><td>跌倒</td><td>住民代甲</td><td>床邊</td><td><span class="tag yellow">輕微</span></td><td>X 光確認無骨折</td></tr>
+<tr><td>06/12</td><td>壓傷</td><td>住民代丁</td><td>臥室</td><td><span class="tag red">中度</span></td><td>護理處置、回診追蹤</td></tr>
+<tr><td>06/08</td><td>跌倒</td><td>住民代戊</td><td>廁所</td><td><span class="tag green">無傷</span></td><td>增加夜間巡視</td></tr>
+<tr><td>06/05</td><td>跌倒</td><td>住民代己</td><td>床邊</td><td><span class="tag yellow">輕微</span></td><td>消毒、通知家屬</td></tr>
+<tr><td>06/02</td><td>其他</td><td>住民代庚</td><td>活動室</td><td><span class="tag green">無傷</span></td><td>安撫、記錄行為</td></tr>
+</table>
+</div>
+
+<script>
+function showTab(t){
+  ['form','stats','log'].forEach(function(id){
+    document.getElementById('tab-'+id).style.display=(id===t?'':'none');
+  });
+}
+</script>
+
+</div>
+
+</body>
+</html>
