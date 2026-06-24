@@ -1944,6 +1944,15 @@
               });
             }
             fw.insertAdjacentHTML('afterbegin', `<label class="cz-deid"><input type="checkbox" id="txtDeid"> 我已把姓名／身分證／病歷號／電話改成代號（例：住民Ａ、80-84 歲）—— 雲端 AI 不放真實個資</label>`);
+            if(Array.isArray(t.materials) && t.materials.length){
+              const MICON={mp3:'🎙️',xlsx:'📊',docx:'📄',pdf:'📕'};
+              const rows = t.materials.map(m=>
+                `<a href="${esc(m.file)}" download style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0 0;padding:10px 13px;background:#fff;border:1px solid #C7E9DF;border-radius:9px;color:#0B5D52;font-weight:800;text-decoration:none">`
+                +`<span>${MICON[m.type]||'📎'} ${esc(m.label)}</span><span style="white-space:nowrap">⬇️ 下載</span></a>`
+                +(m.note?`<div style="font-size:.76rem;color:var(--muted);line-height:1.5;margin:4px 2px 0">${esc(m.note)}</div>`:'')
+              ).join('');
+              fw.insertAdjacentHTML('afterbegin', `<div style="margin:0 0 14px;padding:12px 14px;background:#F0FAF7;border:1px solid #BFE6DA;border-radius:11px"><div style="font-weight:800;font-size:.85rem;color:#0B5D52;margin-bottom:2px">⬇️ 練習素材（模擬假資料，下載後上傳到 AI 工具實際練）</div>${rows}</div>`);
+            }
             if(t.demo){ fw.insertAdjacentHTML('afterbegin', `<a href="${esc(t.demo)}" target="_blank" rel="noopener" style="display:block;margin:0 0 14px;padding:11px 14px;background:#0D9488;color:#fff;border-radius:10px;font-weight:800;text-decoration:none;text-align:center">🔗 看 Manus 做好的實際範例（可直接操作）→</a>`); }
             const isMicro = (t.category===MICRO_CAT);
             { const tag=$('#txtTag'); if(tag) tag.textContent = isMicro ? '貼進 Manus 生成小工具' : '貼進 ChatGPT／Claude／Gemini'; }
