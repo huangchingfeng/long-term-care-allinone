@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>角色・情境・期望 範本參考｜長照機構 AI 工具箱（阿峰老師）</title>
+<meta name="description" content="長照版 RCE 黃金三角範本：角色（R）、情境（C）、期望（E）各 3 大類現成範例，照著挑、照著填，組出貼著長照工作的好提示詞。">
+<style>
+  :root{--primary:#0099BB;--turq:#5EEAD4;--ink:#0F2A30;--grey:#5A5A5E;--line:#E2E8EC;--bg:#F4FAFB;--card:#ECFBF8}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans CJK TC","Noto Sans TC","PingFang TC",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;padding:24px 16px 70px}
+  .wrap{max-width:1160px;margin:0 auto}
+  .toolbar{max-width:1160px;margin:0 auto 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .back{color:var(--primary);text-decoration:none;font-weight:700;font-size:14px}
+  .back:hover{text-decoration:underline}
+  .print-btn{background:var(--primary);color:#fff;border:none;border-radius:9px;padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer}
+  header.hero{background:linear-gradient(135deg,#0A3340,#0099BB);color:#fff;border-radius:16px;padding:30px 32px;margin-bottom:18px}
+  header.hero h1{font-size:25px;font-weight:800;margin-bottom:10px;line-height:1.3}
+  header.hero p{font-size:14.5px;opacity:.94;max-width:840px}
+  .triangle{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .tri{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:10px;padding:9px 14px;font-size:13.5px;font-weight:600}
+  .tri b{color:var(--turq)}
+  .howto{background:#fff;border:1px solid var(--line);border-left:4px solid var(--turq);border-radius:12px;padding:15px 18px;margin-bottom:24px;font-size:14px;color:var(--grey)}
+  .howto b{color:var(--ink)}
+  .deid{background:#FFF6E9;border:1px solid #F2C879;border-radius:12px;padding:12px 16px;margin-bottom:26px;font-size:13.5px;color:#92560C;font-weight:600}
+  .rce-sec{margin-bottom:38px;break-inside:avoid}
+  .sec-title{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;border-bottom:3px solid var(--ink);padding-bottom:10px}
+  .sec-letter{font-size:40px;font-weight:900;color:var(--ink);line-height:1}
+  .sec-zh{font-size:26px;font-weight:900;color:var(--ink)}
+  .sec-tag{font-size:14px;font-weight:800;color:#fff;background:var(--primary);border-radius:7px;padding:3px 10px;align-self:center}
+  .sec-sub{font-size:13.5px;color:var(--grey);margin:10px 0 16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .col{background:#fff;border:2px solid var(--ink);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .col-h{background:var(--turq);color:#06302B;font-weight:800;font-size:16px;text-align:center;padding:11px 10px;border-bottom:2px solid var(--ink)}
+  .col-body{padding:12px 14px;display:flex;flex-direction:column;gap:11px}
+  .ex-t{font-weight:800;font-size:14px;color:var(--ink);border-bottom:1px solid var(--turq);padding-bottom:3px;margin-bottom:3px}
+  .ex-d{font-size:13px;color:var(--grey);line-height:1.6}
+  .ex.bullet{font-size:13.5px;line-height:1.65;display:flex;gap:6px;align-items:flex-start;border-bottom:1px dashed var(--line);padding-bottom:9px}
+  .ex.bullet:last-child{border-bottom:none;padding-bottom:0}
+  .ex-lab{font-weight:800;color:var(--primary);white-space:nowrap}
+  .ex-sep{color:#9CA3AF}
+  .ex-sc{color:var(--ink)}
+  .dot{color:var(--primary);font-weight:900}
+  .combine{background:#06302B;color:#E8FFFB;border-radius:16px;padding:26px 30px;margin-top:10px}
+  .combine h2{font-size:19px;font-weight:800;margin-bottom:6px;color:var(--turq)}
+  .combine p.lead{font-size:13.5px;opacity:.9;margin-bottom:16px}
+  .combine .demo{background:rgba(255,255,255,.07);border:1px solid rgba(94,234,212,.3);border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.8}
+  .combine .demo .tag{display:inline-block;background:var(--turq);color:#06302B;font-weight:800;border-radius:6px;padding:1px 8px;font-size:12px;margin-right:6px}
+  footer{text-align:center;color:#9CA3AF;font-size:12px;margin-top:34px}
+  @media (max-width:880px){.grid3{grid-template-columns:1fr} .sec-zh{font-size:22px} .sec-letter{font-size:32px}}
+  @media print{body{background:#fff;padding:0} .toolbar,.back,.print-btn{display:none} .col,.combine{break-inside:avoid} header.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <a class="back" href="index.html">← 回長照 AI 工具箱</a>
+    <button class="print-btn" onclick="window.print()">🖨️ 列印 / 存成 PDF</button>
+  </div>
+  <div class="wrap">
+    <header class="hero">
+      <h1>角色・情境・期望 範本參考（長照版 RCE 黃金三角）</h1>
+      <p>好提示詞的骨架就三件事：先給 AI 一個<b>角色</b>（要它用誰的專業回答）、講清楚<b>情境</b>（你遇到什麼事）、說明白<b>期望</b>（你要它產出什麼、用什麼格式）。這頁把長照常見的三段都列成現成範例，照著挑、照著改，就能組出貼著你工作的提示詞。</p>
+      <div class="triangle">
+        <span class="tri"><b>R</b> 角色 Role：要 AI 扮演哪種長照專家</span>
+        <span class="tri"><b>C</b> 情境 Context：你現在遇到的真實任務</span>
+        <span class="tri"><b>E</b> 期望 Expectation：要產出什麼、格式與限制</span>
+      </div>
+    </header>
+
+    <div class="howto"><b>怎麼用這三頁：</b>從 R 挑一個角色 ＋ 用 C 描述你的情境 ＋ 用 E 講清楚你要的成果，三段接起來就是一個完整提示詞。工具箱的範本已經幫你組好這三段；想自己從零寫、或想改得更貼自己的狀況時，就翻這頁。</div>
+    <div class="deid">⚠️ 去識別化提醒：填情境與資料時，住民／家屬一律用代號（例：住民Ａ、80–84 歲、家屬Ｂ），真實姓名、身分證、病歷號、電話絕不貼進雲端 AI。</div>
+
+  <section class="rce-sec">
+    <div class="sec-title"><span class="sec-letter">R</span><span class="sec-zh">角色</span><span class="sec-tag">範本</span></div>
+    <p class="sec-sub">要 AI 用「誰的專業」來回答。角色給得越具體（年資＋專長領域），回答越像行家。</p>
+    <div class="grid3"><div class="col"><div class="col-h">經營管理與行政類</div><div class="col-body"><div class="ex"><div class="ex-t">資深長照機構評鑑輔導顧問（40年，衛福部評鑑委員）</div><div class="ex-d">看過上千件機構評鑑準備，最懂委員審查視角、佐證怎麼補、哪些是必過項與加嚴指標。</div></div><div class="ex"><div class="ex-t">長照機構行政主任（30年，大型護理之家）</div><div class="ex-d">精通公文函稿、補助核銷、主管機關往來與機構日常營運管理。</div></div><div class="ex"><div class="ex-t">補助核銷稽核顧問（35年，社會局承辦出身）</div><div class="ex-d">最清楚核銷退件地雷：單據缺漏、品名不符、印領清冊缺漏、跨科目挪用。</div></div><div class="ex"><div class="ex-t">教育訓練與人事經理（25年，長照集團）</div><div class="ex-d">專精各職類法定時數規劃、在職訓練設計、排班人力調度與人員留任。</div></div></div></div><div class="col"><div class="col-h">護理與照護專業類</div><div class="col-body"><div class="ex"><div class="ex-t">資深長照護理督導（40年，醫學中心護理部）</div><div class="ex-d">熟悉 SBAR 交班、照顧計畫、感染管制與評鑑護理品質指標。</div></div><div class="ex"><div class="ex-t">失智照護專家（30年，失智共照中心）</div><div class="ex-d">精通失智行為（BPSD）處理、非藥物介入與家屬衛教溝通。</div></div><div class="ex"><div class="ex-t">復能服務整合治療師（25年，居家與機構復健）</div><div class="ex-d">熟悉 ADL／IADL 評估、復能計畫設計、輔具與居家環境改善。</div></div><div class="ex"><div class="ex-t">感染管制師（20年，護理之家感管）</div><div class="ex-d">專精洗手稽核、群聚事件處置、職場安全與感控教育訓練。</div></div></div></div><div class="col"><div class="col-h">個案服務與家屬溝通類</div><div class="col-body"><div class="ex"><div class="ex-t">資深個案管理社工督導（40年，長照管理中心）</div><div class="ex-d">熟悉跨專業個案研討、服務輸送、照顧計畫銜接與資源連結。</div></div><div class="ex"><div class="ex-t">家屬溝通與申訴處理顧問（30年，長照家庭服務）</div><div class="ex-d">擅長難溝通家屬、家庭會議引導、申訴回覆與情緒安撫。</div></div><div class="ex"><div class="ex-t">福利資源與補助申請專家（25年，社福機構）</div><div class="ex-d">精通長照給付、中低收入戶資格、喘息服務與輔具補助申請。</div></div></div></div></div>
+  </section>
+
+  <section class="rce-sec">
+    <div class="sec-title"><span class="sec-letter">C</span><span class="sec-zh">情境</span><span class="sec-tag">範本</span></div>
+    <p class="sec-sub">把你真實遇到的任務一句話講清楚。情境越貼近現場，AI 越不會給空泛答案。</p>
+    <div class="grid3"><div class="col"><div class="col-h">評鑑與文書作業類</div><div class="col-body"><div class="ex bullet"><span class="ex-lab">評鑑佐證</span><span class="ex-sep">—</span><span class="ex-sc">下個月要評鑑，主任要我把這一年的會議紀錄、簽到單整理成委員看得懂的佐證</span></div><div class="ex bullet"><span class="ex-lab">公文函稿</span><span class="ex-sep">—</span><span class="ex-sc">我要寫一份給衛生局的公文，說明機構改善缺失的情形</span></div><div class="ex bullet"><span class="ex-lab">核銷結案</span><span class="ex-sep">—</span><span class="ex-sc">補助計畫要結案，我要把一整年的支出單據整理成核銷報告</span></div><div class="ex bullet"><span class="ex-lab">改善計畫</span><span class="ex-sep">—</span><span class="ex-sc">評鑑被開了缺失，我要寫一份改善措施與完成時程</span></div><div class="ex bullet"><span class="ex-lab">自評報告</span><span class="ex-sep">—</span><span class="ex-sc">我要為某個評鑑指標寫一段自評說明，附上我們的實際做法</span></div><div class="ex bullet"><span class="ex-lab">法規查核</span><span class="ex-sep">—</span><span class="ex-sc">我需要確認最新版評鑑基準有哪些必過項目與加嚴指標</span></div></div></div><div class="col"><div class="col-h">照護現場與紀錄類</div><div class="col-body"><div class="ex bullet"><span class="ex-lab">交班紀錄</span><span class="ex-sep">—</span><span class="ex-sc">我要把早上的口頭交班整理成 SBAR 結構的書面交班</span></div><div class="ex bullet"><span class="ex-lab">照顧計畫</span><span class="ex-sep">—</span><span class="ex-sc">新住民入住，我要為他擬一份個別化照顧計畫</span></div><div class="ex bullet"><span class="ex-lab">異常事件</span><span class="ex-sep">—</span><span class="ex-sc">昨天有住民跌倒，我要寫一份異常事件通報與檢討</span></div><div class="ex bullet"><span class="ex-lab">個案紀錄</span><span class="ex-sep">—</span><span class="ex-sc">我要把這次個案研討的討論整理成結論與待辦追蹤</span></div><div class="ex bullet"><span class="ex-lab">衛教說明</span><span class="ex-sep">—</span><span class="ex-sc">我要為家屬準備一份失智照護的衛教說明</span></div><div class="ex bullet"><span class="ex-lab">感控稽核</span><span class="ex-sep">—</span><span class="ex-sc">我要把這個月的洗手稽核結果整理成一份報告</span></div></div></div><div class="col"><div class="col-h">家屬溝通與活動類</div><div class="col-body"><div class="ex bullet"><span class="ex-lab">家屬說明</span><span class="ex-sep">—</span><span class="ex-sc">住民狀況有變化，我要寫一封讓家屬安心又清楚的說明</span></div><div class="ex bullet"><span class="ex-lab">活動企劃</span><span class="ex-sep">—</span><span class="ex-sc">端午節要辦活動，我要寫一份活動企劃與流程表</span></div><div class="ex bullet"><span class="ex-lab">滿意度調查</span><span class="ex-sep">—</span><span class="ex-sc">我要設計一份家屬滿意度問卷</span></div><div class="ex bullet"><span class="ex-lab">申訴回覆</span><span class="ex-sep">—</span><span class="ex-sc">家屬投訴照護問題，我要寫一份正式且同理的回覆</span></div><div class="ex bullet"><span class="ex-lab">社群貼文</span><span class="ex-sep">—</span><span class="ex-sc">機構粉專要發活動花絮，我要寫一篇溫馨的貼文</span></div><div class="ex bullet"><span class="ex-lab">募款邀請</span><span class="ex-sep">—</span><span class="ex-sc">我要寫一封向社區募集物資或志工的邀請信</span></div></div></div></div>
+  </section>
+
+  <section class="rce-sec">
+    <div class="sec-title"><span class="sec-letter">E</span><span class="sec-zh">期望</span><span class="sec-tag">範本</span></div>
+    <p class="sec-sub">明確說出你要的「成果＋格式＋限制」。期望寫得越清楚，越不用來回重問。</p>
+    <div class="grid3"><div class="col"><div class="col-h">文件整理與轉換類</div><div class="col-body"><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我把這段口頭交班整理成 SBAR 結構（現況／背景／評估／建議），住民一律用代號，並把要追蹤的事項獨立拉成一張接班待辦清單。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我把這一年的會議紀錄整理成評鑑佐證清單，每筆標出對應哪個評鑑指標、還缺哪些文件。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我把這疊核銷單據的問題整理成「退補件清單」，逐筆列出缺什麼、該補什麼，並附各科目剩餘額度。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我把這份很雜的缺失隨手清單，分類到評鑑面向、標出風險高低、排出改善時程與負責人。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我把這份活動流水帳整理成補助核銷可用的結案格式，列出支出項目、金額與對應佐證。</span></div></div></div><div class="col"><div class="col-h">分析與判斷類</div><div class="col-body"><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我分析這位住民（用代號）近一個月的進食量與體重變化，找出需要注意的趨勢並提醒風險。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">根據這份近半年的跌倒事件紀錄，幫我找出共同的風險因子，提出可執行的防跌改善方向。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我比較這幾家廠商的衛材報價與效期，整理成一頁的採購決策建議。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我分析這週的排班表，找出連續夜班、超時與人力不足的時段，並提出調整建議。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">根據這份家屬滿意度問卷結果，幫我找出最該優先改善的三件事，並說明理由。</span></div></div></div><div class="col"><div class="col-h">報告與溝通撰寫類</div><div class="col-body"><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我寫一封給家屬的說明信，語氣溫暖、清楚交代住民狀況與我們的處置，結尾留下聯絡方式。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我寫一份補助計畫核銷結案報告，總結計畫成果、經費使用與效益，可直接送主管機關。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我寫一份評鑑缺失改善情形陳報，依缺失逐項說明改善措施、完成時程與佐證。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我寫一份個別化照顧計畫，包含照顧目標、具體措施、負責角色與檢核時間。</span></div><div class="ex bullet"><span class="dot">•</span><span class="ex-sc">幫我寫一份家屬座談會的會議紀錄，分段摘要議題、決議與後續追蹤事項。</span></div></div></div></div>
+  </section>
+
+    <div class="combine">
+      <h2>🧩 三段組起來長這樣</h2>
+      <p class="lead">隨手把 R＋C＋E 接起來，就是一個可以直接貼進 Gemini／ChatGPT／Claude 的完整提示詞：</p>
+      <div class="demo">
+        <span class="tag">R 角色</span>你是一位有 40 年經驗的資深長照護理督導，熟悉 SBAR 交班與評鑑護理品質指標。<br><br>
+        <span class="tag">C 情境</span>我要把今天早上的口頭交班整理成書面交班，住民狀況包含發燒、跌倒風險與用藥調整。<br><br>
+        <span class="tag">E 期望</span>請依住民代號逐筆，用 SBAR 結構（現況／背景／評估／建議）精簡呈現；把要持續追蹤的事項獨立拉成一張「接班待辦清單」，標註負責班別；全程繁體中文台灣長照用語，住民一律用代號，數值若沒提到就標「待確認」。
+      </div>
+    </div>
+
+    <footer>長照機構 AI 工具箱 ｜ 角色・情境・期望範本參考 ｜ 阿峰老師（黃敬峰）· Autolab ｜ AI 出初稿、人最後核對簽署，機長永遠是你</footer>
+  </div>
+</body>
+</html>
