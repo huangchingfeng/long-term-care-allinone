@@ -117,8 +117,13 @@
 
 <script>
 (function(){
-  // ⬇️ 部署 Apps Script 後，把網址貼進這裡（見 register-backend/SETUP.md）
-  var ENDPOINT = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+  // Google 表單後端（formResponse）— 用 Forms API headless 建立，免 Apps Script 授權、不會被擋
+  var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSdNwKaboyyDniXjqECgQABNDF69ZsmnWAzyYClcZIgXaUnhYA/formResponse';
+  var ENTRY = {
+    name:'entry.1093974292', email:'entry.1472322245', company:'entry.1362681339',
+    phone:'entry.257377406', title:'entry.1382643654', source:'entry.1073314782',
+    consent:'entry.1291406437'
+  };
 
   var $ = function(s){ return document.querySelector(s); };
 
@@ -140,25 +145,17 @@
     $('#err').style.display='none';
     var btn = $('#sb'); btn.disabled=true; btn.textContent='送出中…';
 
-    var data = {
-      name: name,
-      email: email,
-      company: company,
-      phone: ($('#phone').value||'').trim(),
-      title: $('#title').value||'',
-      source: $('#source').value||'',
-      consent: $('#consent').checked ? '願意' : '未勾選',
-      activity: '長照工具箱註冊'
-    };
+    var p = new URLSearchParams();
+    p.append(ENTRY.name, name);
+    p.append(ENTRY.email, email);
+    p.append(ENTRY.company, company);
+    p.append(ENTRY.phone, ($('#phone').value||'').trim());
+    p.append(ENTRY.title, $('#title').value||'');
+    p.append(ENTRY.source, $('#source').value||'');
+    p.append(ENTRY.consent, $('#consent').checked ? '願意' : '未勾選');
 
-    if(ENDPOINT.indexOf('REPLACE_WITH') === 0){
-      // 尚未設定後端：先讓畫面正常，提示開發者
-      alert('報名後端尚在設定中，請稍後再試，或直接 LINE／電話 0976-715-102 找阿峰老師。');
-      btn.disabled=false; btn.textContent='送出報名';
-      return;
-    }
-
-    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) })
+    fetch(FORM_ACTION, { method:'POST', mode:'no-cors',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: p.toString() })
       .then(finish).catch(finish);
     function finish(){
       $('#f').style.display='none';
