@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>報名 / 註冊｜長照機構 AI 工具箱（阿峰老師）</title>
+<meta name="description" content="留下姓名與聯絡方式，加入阿峰老師長照 AI 工具箱，收到新功能、範本與課程資訊。">
+<style>
+  :root{--primary:#0099BB;--primary-d:#007A99;--accent:#FF6B35;--ink:#1C1C1E;--grey:#5A5A5E;--line:#E5E7EB;--bg:#F2F5F7;--ok:#0D9488}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans CJK TC","Noto Sans TC","PingFang TC",sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;padding:22px 13px 70px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:600px;margin:0 auto}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(16,24,40,.07)}
+  .head{background:linear-gradient(135deg,#0A3340,#0099BB);color:#fff;padding:24px 24px 20px}
+  .head h1{font-size:20px;font-weight:800;margin-bottom:6px}
+  .head .pill{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 12px;font-size:12.5px}
+  .intro{padding:17px 24px;font-size:13.5px;color:var(--grey);border-bottom:1px solid var(--line);background:#F8FBFC}
+  .intro b{color:var(--ink)}
+  .q{padding:17px 24px;border-bottom:1px solid var(--line)}
+  .qt{font-size:14.5px;font-weight:700;margin-bottom:9px}
+  .qt .star{color:var(--accent)}
+  .qt .opt{color:var(--grey);font-size:12px;font-weight:600}
+  input[type=text],input[type=email],input[type=tel],select{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;font:inherit;font-size:15px;background:#fff}
+  input:focus,select:focus{outline:none;border-color:var(--primary)}
+  .consent{display:flex;align-items:flex-start;gap:10px;border:1.5px solid var(--line);border-radius:10px;padding:12px 13px;font-size:13.5px;cursor:pointer;background:#F8FBFC}
+  .consent input{flex:0 0 auto;width:18px;height:18px;accent-color:var(--primary);margin-top:1px}
+  .consent.on{border-color:var(--primary);background:#F0F8FB}
+  .deid{margin:0 24px;margin-top:14px;background:#FFF6E9;border:1px dashed #F2C879;border-radius:10px;padding:11px 13px;font-size:12.5px;color:#92560C;line-height:1.7}
+  .deid b{color:#7C2D12}
+  .submit{display:block;width:calc(100% - 48px);margin:16px 24px 22px;background:var(--primary);color:#fff;border:none;border-radius:10px;padding:14px;font-weight:800;font-size:16px;cursor:pointer}
+  .submit:disabled{opacity:.6}
+  .err{color:var(--accent);font-size:13px;font-weight:700;margin:0 24px 8px;display:none}
+  .done{display:none;padding:46px 30px;text-align:center}
+  .done .big{font-size:52px;margin-bottom:14px}
+  .done h2{font-size:20px;font-weight:800;margin-bottom:10px}
+  .done p{font-size:14px;color:var(--grey)}
+  .donecontact{margin:18px auto 0;max-width:430px;background:#F0F7FA;border:1px solid #BFE3EE;border-radius:12px;padding:15px 18px;font-size:13.5px;color:var(--ink);line-height:1.85;text-align:left}
+  .donecontact b{color:var(--primary-d)}
+  .toolbox{display:inline-block;margin-top:16px;color:var(--primary-d);font-weight:700;font-size:14px;text-decoration:none}
+  .foot{text-align:center;color:#9CA3AF;font-size:11.5px;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card" id="card">
+    <div class="head">
+      <h1>報名 / 加入長照 AI 工具箱</h1>
+      <span class="pill">📝 30 秒・留個聯絡方式就好</span>
+    </div>
+    <div class="intro">
+      嗨，我是阿峰 👋 留下你的資料，我會把<b>工具箱新功能、現成範本、實用 AI 課程資訊</b>第一手通知你。<br>之後想請我去機構上課、或想要你機構專屬的範例，我也能直接跟你聯繫。
+    </div>
+
+    <form id="f">
+      <div class="q">
+        <div class="qt">姓名<span class="star"> *</span></div>
+        <input type="text" id="name" autocomplete="name" placeholder="您的稱呼">
+      </div>
+      <div class="q">
+        <div class="qt">Email<span class="star"> *</span></div>
+        <input type="email" id="email" autocomplete="email" placeholder="example@mail.com">
+      </div>
+      <div class="q">
+        <div class="qt">機構 / 公司名稱<span class="star"> *</span></div>
+        <input type="text" id="company" autocomplete="organization" placeholder="例：○○護理之家、○○日照中心">
+      </div>
+      <div class="q">
+        <div class="qt">聯絡電話<span class="opt"> 選填</span></div>
+        <input type="tel" id="phone" autocomplete="tel" placeholder="手機或市話（方便邀課時聯繫）">
+      </div>
+      <div class="q">
+        <div class="qt">你的職稱 / 角色<span class="opt"> 選填</span></div>
+        <select id="title">
+          <option value="">— 請選擇 —</option>
+          <option value="行政／總務">行政／總務</option>
+          <option value="護理師">護理師</option>
+          <option value="照服員">照服員</option>
+          <option value="居服員／日照">居服員／日照</option>
+          <option value="社工">社工</option>
+          <option value="主管／負責人">主管／負責人</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="q">
+        <div class="qt">怎麼知道這個工具箱的？<span class="opt"> 選填</span></div>
+        <select id="source">
+          <option value="">— 請選擇 —</option>
+          <option value="上過阿峰老師的課">上過阿峰老師的課</option>
+          <option value="同事／朋友推薦">同事／朋友推薦</option>
+          <option value="LINE 學習社群">LINE 學習社群</option>
+          <option value="社群／網路搜尋">社群／網路搜尋</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+      <div class="q">
+        <label class="consent on" id="consentBox">
+          <input type="checkbox" id="consent" checked>
+          <span>我願意收到阿峰老師的 AI 應用電子報與課程資訊（隨時可退訂）</span>
+        </label>
+      </div>
+    </form>
+
+    <div class="deid">⚠️ 只收必要資料，<b>請勿填入住民個資</b>。你的資料僅供阿峰老師通知與聯繫使用，不會外流。</div>
+    <div class="err" id="err">姓名、Email、機構是必填，再確認一下 🙏</div>
+    <button type="button" class="submit" id="sb" onclick="submitForm()">送出報名</button>
+
+    <div class="done" id="done">
+      <div class="big">🎉</div>
+      <h2>收到了，謝謝你加入！</h2>
+      <p>我會把工具箱新功能與課程資訊通知你。<br>現在就可以開始用工具箱 👇</p>
+      <a class="toolbox" href="index.html">→ 進長照 AI 工具箱</a>
+      <div class="donecontact">想直接找老師、或想請老師到機構上課：<br><b>阿峰老師（黃敬峰）</b>　企業 AI 實戰培訓<br>📱 LINE／電話：0976-715-102<br>✉️ Email：ai@autolab.cloud<br>🌐 網站：autolab.cloud</div>
+    </div>
+  </div>
+  <div class="foot">長照機構 AI 工具箱 ｜ 阿峰老師（黃敬峰）· Autolab</div>
+</div>
+
+<script>
+(function(){
+  // ⬇️ 部署 Apps Script 後，把網址貼進這裡（見 register-backend/SETUP.md）
+  var ENDPOINT = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+
+  var $ = function(s){ return document.querySelector(s); };
+
+  // 同意選項視覺切換
+  var cbox = $('#consentBox'), cb = $('#consent');
+  cb.addEventListener('change', function(){ cbox.classList.toggle('on', cb.checked); });
+
+  function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  window.submitForm = function(){
+    var name = ($('#name').value||'').trim();
+    var email = ($('#email').value||'').trim();
+    var company = ($('#company').value||'').trim();
+    if(!name || !isEmail(email) || !company){
+      $('#err').style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    $('#err').style.display='none';
+    var btn = $('#sb'); btn.disabled=true; btn.textContent='送出中…';
+
+    var data = {
+      name: name,
+      email: email,
+      company: company,
+      phone: ($('#phone').value||'').trim(),
+      title: $('#title').value||'',
+      source: $('#source').value||'',
+      consent: $('#consent').checked ? '願意' : '未勾選',
+      activity: '長照工具箱註冊'
+    };
+
+    if(ENDPOINT.indexOf('REPLACE_WITH') === 0){
+      // 尚未設定後端：先讓畫面正常，提示開發者
+      alert('報名後端尚在設定中，請稍後再試，或直接 LINE／電話 0976-715-102 找阿峰老師。');
+      btn.disabled=false; btn.textContent='送出報名';
+      return;
+    }
+
+    fetch(ENDPOINT, { method:'POST', mode:'no-cors', body: JSON.stringify(data) })
+      .then(finish).catch(finish);
+    function finish(){
+      $('#f').style.display='none';
+      $('.deid').style.display='none';
+      $('#sb').style.display='none';
+      $('#done').style.display='block';
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  };
+})();
+</script>
+</body>
+</html>
