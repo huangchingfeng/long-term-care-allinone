@@ -1272,6 +1272,25 @@
 .cz-pfrom{display:inline-block;margin-left:6px;background:#EEF2F7;color:#5A6675;border-radius:5px;padding:1px 6px;font-size:.72rem;font-weight:700}
 .cz-relhead{margin:18px 0 2px;padding-top:14px;border-top:2px dashed var(--line);font-weight:800;font-size:.95rem;color:var(--ink)}
 .cz-relhead span{display:block;font-weight:500;font-size:.8rem;color:var(--muted);margin-top:2px}
+
+/* ── P1-3 手機友善（顧問實測：輸入框 14.4px 會觸發 iOS 自動放大、按鈕觸控目標不足）── */
+.cz-field textarea, .cz-field select.cz-fsel, .cz-field input{font-size:16px !important;min-height:52px}
+.cz-set{padding:12px 16px;font-size:1rem;min-height:48px}
+.cz-tab{padding:12px 16px;font-size:.98rem;min-height:44px}
+.cz-deid input[type=checkbox]{width:24px;height:24px;accent-color:var(--primary-blue)}
+.cz-deid{min-height:56px;display:flex;align-items:center;gap:10px}
+.cz-redline{font-size:15px}
+@media (max-width:760px){
+  /* 身分切換：兩排三格，字級與觸控目標拉大 */
+  .cz-setswitch{display:grid !important;grid-template-columns:repeat(3,1fr);gap:6px;width:100%;margin-top:8px}
+  .cz-set{width:100%;min-height:56px;font-size:1rem;padding:8px 4px;line-height:1.3}
+  /* 分類：橫向捲動，不要堆成三排 */
+  #txtTabs{display:flex;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:8px;padding-bottom:6px}
+  #txtTabs .cz-tab{flex:0 0 auto}
+  /* 複製鈕固定在底部，永遠按得到 */
+  .cz-modal .cz-copy.primary{position:sticky;bottom:0;z-index:20;width:calc(100% - 24px);box-shadow:0 -6px 16px rgba(0,0,0,.12);min-height:52px;font-size:1.02rem}
+}
+
 .cz-redline{background:#FFF1EC;border-top:1px solid #FAD4C6;border-bottom:1px solid #FAD4C6;padding:9px 16px;text-align:center;font-size:.83rem;font-weight:800;color:#A5391A;line-height:1.6}
 .cz-redline a{color:#0D9488;text-decoration:underline;font-weight:900;white-space:nowrap}
 .cz-whatsnew{background:linear-gradient(90deg,#E1F0F5,#FFF6E9);border-bottom:1px solid var(--line);padding:10px 16px;text-align:center;font-size:.86rem;font-weight:800;color:#0A3340;line-height:1.6}
@@ -1743,7 +1762,7 @@
                             <div id="txtPersona" class="cz-setswitch" role="tablist" aria-label="身分切換" style="display:none"></div>
                             <div class="search-field" style="max-width:230px">
                                 <i class="bi bi-search"></i>
-                                <input id="txtSearch" class="form-control" type="search" placeholder="搜尋模板…" autocomplete="off">
+                                <input id="txtSearch" class="form-control" type="search" placeholder="搜尋：交班、跌倒、評鑑、核銷、家屬、衛教…" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -1973,13 +1992,23 @@
             }else{
               fw.innerHTML = fields.map(f=>
                 `<div class="cz-field">
-                  <div class="cz-flabel"><span>${esc(f.label||f.id)}</span></div>
+                  <div class="cz-flabel"><span>${esc(f.label||f.id)}</span>${f.type!=='select'&&f.placeholder?`<button type="button" class="cz-mini" data-fill="${esc(f.id)}">範例</button>`:''}</div>
                   ${ f.type==='select'
                      ? `<select id="txf_${esc(f.id)}" class="cz-fsel"><option value="">— 請選擇（也可複製後自行修改）—</option>`+(Array.isArray(f.options)?f.options:[]).map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')+`</select>`
                      : f.type==='textarea'
                      ? `<textarea id="txf_${esc(f.id)}" placeholder="${esc(f.placeholder||'')}"></textarea>`
                      : `<textarea id="txf_${esc(f.id)}" rows="1" placeholder="${esc(f.placeholder||'')}"></textarea>` }
                 </div>`).join('');
+              // 「範例」鈕：把 placeholder 的例子一鍵灌進欄位（顧問：719 個欄位要手打是中高齡最大放棄點）
+              $$('.cz-mini[data-fill]', fw).forEach(btn=>{
+                btn.addEventListener('click', ()=>{
+                  const el=$('#txf_'+CSS.escape(btn.dataset.fill), fw); if(!el) return;
+                  const ph=(el.getAttribute('placeholder')||'').replace(/^(例如|例)[:：]?\s*/,'').trim();
+                  if(!ph) return;
+                  el.value=ph; autoGrow(el); build();
+                  btn.textContent='已填入'; setTimeout(()=>btn.textContent='範例',1200);
+                });
+              });
               fields.forEach(f=>{
                 const el=$('#txf_'+CSS.escape(f.id), fw); if(!el) return;
                 const pre = prefill && prefill[f.id];
@@ -1994,7 +2023,7 @@
                 }
               });
             }
-            fw.insertAdjacentHTML('afterbegin', `<label class="cz-deid"><input type="checkbox" id="txtDeid"> 我已把姓名／身分證／病歷號／電話改成代號（例：住民Ａ、80-84 歲）—— 雲端 AI 不放真實個資</label>`);
+            fw.insertAdjacentHTML('afterbegin', `<label class="cz-deid"><input type="checkbox" id="txtDeid"> 我已把姓名／身分證／病歷號／電話改成代號（例：住民Ａ、80-84 歲）—— 雲端 AI 不放真實個資</label><div style="font-size:.8rem;color:var(--muted);margin:6px 2px 12px">💡 不想打字？按欄位右邊的「範例」直接帶入，或用手機鍵盤的 🎤 麥克風用唸的。</div>`);
             if(Array.isArray(t.materials) && t.materials.length){
               const MICON={mp3:'🎙️',xlsx:'📊',docx:'📄',pdf:'📕'};
               const rows = t.materials.map(m=>
