@@ -1279,6 +1279,19 @@
 .cz-tab{padding:12px 16px;font-size:.98rem;min-height:44px}
 .cz-deid input[type=checkbox]{width:24px;height:24px;accent-color:var(--primary-blue)}
 .cz-deid{min-height:56px;display:flex;align-items:center;gap:10px}
+
+/* 複製 3 次後的接球小卡（可關閉、關掉不再出現） */
+.ltc-offer{position:fixed;right:16px;bottom:16px;z-index:100001;max-width:330px;background:#fff;border:1px solid #BFE3EE;border-left:5px solid var(--primary-blue);border-radius:14px;padding:16px 18px 15px;box-shadow:0 14px 40px rgba(16,24,40,.22);opacity:0;transform:translateY(14px);transition:.25s}
+.ltc-offer.show{opacity:1;transform:translateY(0)}
+.ltc-offer-x{position:absolute;top:8px;right:10px;border:none;background:transparent;font-size:15px;color:#9AA5B1;cursor:pointer;padding:4px 6px;line-height:1}
+.ltc-offer-t{font-weight:800;font-size:.98rem;color:var(--ink);margin-bottom:5px}
+.ltc-offer-d{font-size:.84rem;color:var(--muted);line-height:1.65;margin-bottom:11px}
+.ltc-offer-d b{color:var(--ink)}
+.ltc-offer-b{display:flex;gap:8px;flex-wrap:wrap}
+.ltc-offer-go{flex:1;text-align:center;background:var(--primary-blue);color:#fff;border-radius:9px;padding:10px 12px;font-weight:800;font-size:.87rem;text-decoration:none;min-height:44px;display:flex;align-items:center;justify-content:center}
+.ltc-offer-alt{text-align:center;color:var(--primary-blue);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-weight:700;font-size:.87rem;text-decoration:none;min-height:44px;display:flex;align-items:center;justify-content:center}
+@media(max-width:760px){.ltc-offer{right:10px;left:10px;bottom:10px;max-width:none}}
+
 .cz-redline{font-size:15px}
 @media (max-width:760px){
   /* 身分切換：兩排三格，字級與觸控目標拉大 */
@@ -2072,6 +2085,34 @@
             const hit=scanPII(text);
             if(hit){ if(!window.confirm('⚠️ 偵測到可能的個資（'+hit+'）。\n雲端 AI 不可輸入真實姓名／身分證／病歷號／電話，請改成代號。\n\n仍要複製嗎？')) return; }
             doCopy(text);
+            bumpCopyCount();
+          }
+          /* 複製＝唯一確定「他覺得有用」的瞬間（顧問：這是第一名的機會，原本沒有任何下一步）。
+             複製滿 3 次才出現一張可關閉的小卡，關掉就不再出現，不擋路、不彈窗。 */
+          function bumpCopyCount(){
+            try{
+              if(localStorage.getItem('ltc_offer_done')==='1') return;
+              const n=(parseInt(localStorage.getItem('ltc_copy_n')||'0',10)||0)+1;
+              localStorage.setItem('ltc_copy_n', String(n));
+              if(n>=3) showOffer(n);
+            }catch(e){}
+          }
+          function showOffer(n){
+            if(document.getElementById('ltcOffer')) return;
+            const box=document.createElement('div');
+            box.id='ltcOffer'; box.className='ltc-offer';
+            box.innerHTML='<button class="ltc-offer-x" aria-label="關閉">✕</button>'
+              +'<div class="ltc-offer-t">👍 你已經複製了 '+n+' 個範本</div>'
+              +'<div class="ltc-offer-d">要不要順手帶走一份可列印的<b>《長照機構 AI 安全使用檢查表》</b>？貼在電腦旁，動手前十秒勾一遍。新範本上架時也通知你。</div>'
+              +'<div class="ltc-offer-b"><a class="ltc-offer-go" href="register.html">留個 Email，我寄給你</a>'
+              +'<a class="ltc-offer-alt" href="ai-safety-checklist.html" target="_blank" rel="noopener">先直接看</a></div>';
+            document.body.appendChild(box);
+            requestAnimationFrame(()=>box.classList.add('show'));
+            box.querySelector('.ltc-offer-x').addEventListener('click', ()=>{
+              try{ localStorage.setItem('ltc_offer_done','1'); }catch(e){}
+              box.classList.remove('show'); setTimeout(()=>box.remove(),250);
+            });
+            box.querySelector('.ltc-offer-go').addEventListener('click', ()=>{ try{ localStorage.setItem('ltc_offer_done','1'); }catch(e){} });
           }
           $('#txtCopy').addEventListener('click', ()=> cur && guardedCopy($('#txtOut').textContent));
           // 機構版：把填好的內容編進網址,複製給同事打開即預填
