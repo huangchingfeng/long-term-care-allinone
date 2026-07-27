@@ -1268,6 +1268,10 @@
 .cz-followup{margin:0 12px 14px;padding:11px 13px;background:#F6F4FF;border:1px solid #D9D2F7;border-radius:10px;font-size:.82rem;color:#3F2E8C;line-height:1.6}
 .cz-followup b{color:#2A1C6B}
 .cz-followup ul{margin:6px 0 4px;padding-left:18px}
+
+.cz-pfrom{display:inline-block;margin-left:6px;background:#EEF2F7;color:#5A6675;border-radius:5px;padding:1px 6px;font-size:.72rem;font-weight:700}
+.cz-relhead{margin:18px 0 2px;padding-top:14px;border-top:2px dashed var(--line);font-weight:800;font-size:.95rem;color:var(--ink)}
+.cz-relhead span{display:block;font-weight:500;font-size:.8rem;color:var(--muted);margin-top:2px}
 .cz-redline{background:#FFF1EC;border-top:1px solid #FAD4C6;border-bottom:1px solid #FAD4C6;padding:9px 16px;text-align:center;font-size:.83rem;font-weight:800;color:#A5391A;line-height:1.6}
 .cz-redline a{color:#0D9488;text-decoration:underline;font-weight:900;white-space:nowrap}
 .cz-whatsnew{background:linear-gradient(90deg,#E1F0F5,#FFF6E9);border-bottom:1px solid var(--line);padding:10px 16px;text-align:center;font-size:.86rem;font-weight:800;color:#0A3340;line-height:1.6}
@@ -1879,11 +1883,48 @@
             $$('.cz-set',box).forEach(b=> b.addEventListener('click', ()=>{ activePersona=b.dataset.persona; memSet('__persona',activePersona); activeCat='全部'; $$('.cz-set',box).forEach(x=>x.classList.toggle('active',x===b)); renderTabs(); renderGrid(); }));
           }
           const personaBase = ()=> activePersona? modeBase().filter(t=>t.persona===activePersona) : modeBase();
+          // 同義詞：學員會打口語，先展開成範本裡的用字
+          const SYN = {'客訴':'家屬 投訴 抱怨','投訴':'客訴 家屬','抱怨':'客訴 家屬','吵':'客訴 家屬 溝通',
+            '交班':'交班 SBAR 紀錄','評鑑':'評鑑 佐證 自評','核銷':'核銷 補助 經費 單據','請假':'排班 人力 異動',
+            '跌倒':'跌倒 異常事件 意外','家屬':'家屬 溝通 說明','衛教':'衛教 說明 圖卡','排班':'排班 人力 班表',
+            '公文':'公文 函稿 主管機關','發文':'公文 函稿','個案':'個案 訪視 研討','缺工':'人力 招募 留任'};
+          const expandKw = (k)=>{ let s=''; Object.keys(SYN).forEach(w=>{ if(k.includes(w)) s+=' '+SYN[w]; }); return s.toLowerCase().split(/\s+/).filter(Boolean); };
+          // 精準度優先：標題/分類可比對同義詞；內文只比對原關鍵字（避免同義詞把整站撈出來）
+          const matchKw = (t, kwRaw, syn)=>{
+            const k = kwRaw.toLowerCase();
+            const head = (t.name+' '+t.category+' '+(t.persona||'')).toLowerCase();
+            if(head.includes(k)) return 3;                      // 標題直接命中，最相關
+            if(syn.some(x=>head.includes(x))) return 2;          // 同義詞命中標題
+            if(String(t.template||'').toLowerCase().includes(k)) return 1; // 內文命中原字
+            return 0;
+          };
+          // 搜尋時跨身分（全模式資料），不搜尋時用目前身分
           const visible = ()=>{
+            if(kw){
+              const syn = expandKw(kw);
+              let list = modeBase().map(t=>({t, s:matchKw(t, kw, syn)})).filter(x=>x.s>0);
+              if(activeCat!=='全部') list = list.filter(x=>x.t.category===activeCat);
+              // 相關度優先，同分時自己身分的排前面
+              list.sort((a,b)=> (b.s-a.s) || ((b.t.persona===activePersona)-(a.t.persona===activePersona)));
+              return list.map(x=>x.t);
+            }
             let list = personaBase();
             if(activeCat!=='全部') list = list.filter(t=>t.category===activeCat);
-            if(kw){ const k=kw.toLowerCase(); list = list.filter(t=>(t.name+' '+t.category+' '+(t.template||'')).toLowerCase().includes(k)); }
             return list;
+          };
+          // 其他身分也常用的相關範本（同分類、不同 persona），解決照服員只剩 6 張的問題
+          const related = ()=>{
+            if(kw || !activePersona) return [];
+            const myCats = new Set(personaBase().map(t=>t.category.replace(/^(照顧|居家服務|護理)/,'')));
+            const myIds = new Set(personaBase().map(t=>t.id));
+            let list = modeBase().filter(t=> t.persona!==activePersona && !myIds.has(t.id));
+            if(activeCat!=='全部'){
+              const key = activeCat.replace(/^(照顧|居家服務|護理)/,'');
+              list = list.filter(t=> t.category.includes(key) || key && t.category.replace(/^(照顧|居家服務|護理)/,'')===key);
+            } else {
+              list = list.filter(t=> [...myCats].some(c=> c && t.category.includes(c)));
+            }
+            return list.slice(0, 60);
           };
           function renderTabs(){
             const base = personaBase();
@@ -1893,19 +1934,28 @@
             ).join('');
             $$('.cz-tab', $('#txtTabs')).forEach(b=> b.addEventListener('click', ()=>{ activeCat=b.dataset.cat; renderTabs(); renderGrid(); }));
           }
-          function renderGrid(){
-            const list = visible();
-            if(!list.length){ $('#txtGrid').innerHTML='<div class="cz-empty">找不到符合的模板,換個分類或關鍵字。</div>'; return; }
-            $('#txtGrid').innerHTML = list.map(t=>{
-              const desc = String(t.template||'').replace(/<<<\{[^}]+\}>>>/g,'⋯').split(/[\n。!?]/)[0].slice(0,52);
-              return `<button class="cz-card" data-id="${esc(t.id)}">
+          function cardHtml(t, showPersona){
+            const desc = String(t.template||'').replace(/<<<\{[^}]+\}>>>/g,'⋯').split(/[\n。!?]/)[0].slice(0,52);
+            const pTag = showPersona && t.persona ? `<span class="cz-pfrom">${PICON[t.persona]||''} ${esc(t.persona)}</span>` : '';
+            return `<button class="cz-card" data-id="${esc(t.id)}">
                 <div class="cz-cardbody">
-                  <span class="cz-cardcat">${esc(t.category==='Manus 微系統'?(t.icon||icon(t.category)):icon(t.category))} ${esc(t.category)}</span>
+                  <span class="cz-cardcat">${esc(t.category==='Manus 微系統'?(t.icon||icon(t.category)):icon(t.category))} ${esc(t.category)}${pTag}</span>
                   <span class="cz-cardtitle">${esc(t.name)}</span>
                   <span class="cz-cardcase">${esc(desc)}…</span>
                   ${t.demo? `<span style="display:inline-block;margin-top:5px;color:#0D9488;font-weight:800;font-size:.78rem">🔗 附 Manus 做好的範例</span>`:''}
                 </div></button>`;
-            }).join('');
+          }
+          function renderGrid(){
+            const list = visible();
+            const rel = related();
+            if(!list.length && !rel.length){ $('#txtGrid').innerHTML='<div class="cz-empty">找不到符合的模板,換個分類或關鍵字。</div>'; return; }
+            let html = list.map(t=>cardHtml(t, !!kw)).join('');
+            if(!list.length) html = '<div class="cz-empty" style="grid-column:1/-1">這個分類目前沒有專屬你身分的範本，下面是其他身分也常用的 👇</div>';
+            if(rel.length){
+              html += `<div class="cz-relhead" style="grid-column:1/-1">🔗 其他身分也常用的相關範本（${rel.length}）<span>可以直接拿來改，卡片上標了原本是誰在用</span></div>`
+                    + rel.map(t=>cardHtml(t, true)).join('');
+            }
+            $('#txtGrid').innerHTML = html;
             $$('.cz-card', $('#txtGrid')).forEach(el=> el.addEventListener('click', ()=> openModal(el.dataset.id)));
           }
 
